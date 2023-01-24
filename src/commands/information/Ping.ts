@@ -1,13 +1,17 @@
-import { SlashCommandBuilder, CommandInteraction } from 'discord.js';
+import {
+  ApplicationCommandType,
+  CommandInteraction,
+  SlashCommandBuilder
+} from 'discord.js';
 import { ICommand } from '$types/Command'
 
-class Command implements ICommand {
+class Ping implements ICommand {
   data: SlashCommandBuilder;
-  
-  constructor() {
+
+  constructor() {    
     this.data = new SlashCommandBuilder()
       .setName('ping')
-      .setDescription('Return with an ping!');
+      .setDescription('Return with Pong!');
   }
 
   async runner(interaction: CommandInteraction): Promise<any> {
@@ -15,4 +19,4 @@ class Command implements ICommand {
   }
 };
 
-export default Command;
+export default Ping;
