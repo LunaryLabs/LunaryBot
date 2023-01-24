@@ -1,6 +1,5 @@
-import { ClientEvents } from 'discord.js'
-import { ArgsOf } from '$types/Common'
-
+import { ClientEvents, ActivityType } from 'discord.js'
+import client from '../../../index.js'
 export class Command {
   event: keyof ClientEvents;
   
@@ -10,5 +9,9 @@ export class Command {
   
   async runner(): Promise<void> {
     console.log('Bot online!')
+    client.client.user?.setPresence({
+        activities: [{ name: `lunary labs`, type: ActivityType.Watching }],
+        status: 'dnd',
+      });
   }
 }

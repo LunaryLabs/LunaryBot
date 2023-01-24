@@ -25,6 +25,7 @@ export class Lunary {
       intents: this.intents,
     })
 
+    this.login()
     this.loadCommands()
     this.loadEvents()
   }

@@ -5,6 +5,6 @@ EnvLoader();
 
 
 
-const client = new Lunary();
-await client.login();
+let client = new Lunary();
 console.log(`[LunaryLabs] bot iniciado com sucesso!`);
+export default client
