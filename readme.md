@@ -1,0 +1,1 @@
+yarn tsx index.ts
