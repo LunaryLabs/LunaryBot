@@ -1,13 +1,20 @@
-import { SlashCommandBuilder, CommandInteraction, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from 'discord.js'
+import {
+  CommandInteraction,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+  EmbedBuilder,
+  SlashCommandBuilder
+} from 'discord.js'
 import { ICommand } from '$types/Command'
 
-class Command implements ICommand {
-  data: SlashCommandBuilder
-  
-  constructor() {
+class Invite implements ICommand {
+  data: SlashCommandBuilder;
+
+  constructor() {    
     this.data = new SlashCommandBuilder()
-      .setName('invite')
-      .setDescription('Get the bot\'s invite link');
+      .setName('ping')
+      .setDescription('Return with Pong!');
   }
   
   async runner(interaction: CommandInteraction): Promise<any> {
@@ -47,4 +54,4 @@ class Command implements ICommand {
   }
 }
 
-export default Command;
+export default Invite;
