@@ -39,7 +39,10 @@ export class Lunary {
 
       for await (const command of commands) { //pera vou fazer um cmd de base la
         const commandClassFile = join(categoriesDir.toString(), category, command)
-        const commandClass: ICommand = new (await import(commandClassFile));
+        console.log(commandClassFile)
+        const commandFi = (await import(commandClassFile));
+        console.log(commandFi)
+        const commandClass = new commandFi.Command()
         
         this.commands.set(commandClass.data.name, commandClass.data)
         console.log(`[/] comando ${commandClass.data.name} carregado com sucesso`)
@@ -48,7 +51,7 @@ export class Lunary {
   }
 
   async loadEvents(): Promise<void> {
-    const categoriesDir = new URL('../events', import.meta.url)
+    const categoriesDir = new URL('../events/', import.meta.url)
     const categories = await readdir(categoriesDir);
 
     for await (const category of categories) {
@@ -57,10 +60,14 @@ export class Lunary {
 
       for await (const command of commands) { //pera vou fazer um cmd de base la
         const commandClassFile = join(categoriesDir.toString(), category, command)
-        const commandClass: ICommand = new (await import(commandClassFile));
-        
-        this.commands.set(commandClass.data.name, commandClass.data)
-        console.log(`[+] Evento ${commandClass.data.name} carregado com sucesso`)
+        const commandFi = (await import(commandClassFile));
+        console.log(commandFi)
+        const commandClass = new commandFi.Command()
+        console.log(commandClass)
+        this.commands.set(commandClass.event, commandClass.data)
+        console.log(`[+] Evento ${commandClass.event} carregado com sucesso`)
+
+        this.client.on(`${commandClass.event}`, commandClass.runner)
       }
     }
   }

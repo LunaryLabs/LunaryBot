@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, CommandInteraction, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from 'discord.js'
 import { ICommand } from '$types/Command'
 
-class Command implements ICommand {
+export class Command implements ICommand {
   data: SlashCommandBuilder
   
   constructor() {
@@ -21,7 +21,7 @@ class Command implements ICommand {
     const inviteButton = new ButtonBuilder()
       .setLabel("Invite")
       .setStyle(ButtonStyle.Link)
-      .setURL(`https://discord.gg/HcWgHF3Mqv`);
+      .setURL(`https://discord.com/api/oauth2/authorize?client_id=1067487736447127593&permissions=8&scope=bot%20applications.commands`);
     
     const githubButton = new ButtonBuilder()
       .setLabel("Github")
