@@ -2,7 +2,7 @@ import { SlashCommandBuilder, CommandInteraction } from 'discord.js'
 
 import moment from 'moment'
 
-export class Command {
+class Command {
   data: SlashCommandBuilder
   
   constructor() {
@@ -16,3 +16,4 @@ export class Command {
     interaction.reply(`> ${uptime}`)
   }
 }
+export default Command;

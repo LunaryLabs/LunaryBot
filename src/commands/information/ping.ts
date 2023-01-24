@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, CommandInteraction } from 'discord.js';
 import { ICommand } from '$types/Command'
 
-export class Command implements ICommand {
+class Command implements ICommand {
   data: SlashCommandBuilder;
   
   constructor() {

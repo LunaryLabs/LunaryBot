@@ -1,14 +1,15 @@
-import { Client, BitFieldResolvable, GatewayIntentsString, GatewayIntentBits } from 'discord.js'
+import { Client, BitFieldResolvable, GatewayIntentsString, GatewayIntentBits, SlashCommandBuilder } from 'discord.js'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 
 import type { ICommand } from '$types/Command'
+import type { IEvent } from '$types/Event'
 
 export class Lunary {
-  token: string;
-  intents: BitFieldResolvable<GatewayIntentsString, number>;
-  client: Client;
-  commands: Map<string, object>;
+  private token: string;
+  private intents: BitFieldResolvable<GatewayIntentsString, number>;
+  public client: Client;
+  public commands: Array<ICommand>;
 
   constructor() {
     this.token = process.env['TOKEN'] ?? ''
@@ -19,7 +20,7 @@ export class Lunary {
       GatewayIntentBits.MessageContent,
     ],
     
-    this.commands = new Map<string, object>() //como faz isso no ts AAAAAA
+    this.commands = []; 
   
     this.client = new Client({
       intents: this.intents,
@@ -40,12 +41,10 @@ export class Lunary {
 
       for await (const command of commands) { //pera vou fazer um cmd de base la
         const commandClassFile = join(categoriesDir.toString(), category, command)
-        console.log(commandClassFile)
-        const commandFi = (await import(commandClassFile));
-        console.log(commandFi)
-        const commandClass = new commandFi.Command()
+        const commandFile = (await import(commandClassFile)).default;
+        const commandClass: ICommand = new commandFile()
         
-        this.commands.set(commandClass.data.name, commandClass.data)
+        this.commands.push(commandClass)
         console.log(`[/] comando ${commandClass.data.name} carregado com sucesso`)
       }
     }
@@ -56,24 +55,19 @@ export class Lunary {
     const categories = await readdir(categoriesDir);
 
     for await (const category of categories) {
-      const commandsDir = new URL(category, categoriesDir)
-      const commands = await readdir(commandsDir)
+      const eventsDir = new URL(category, categoriesDir)
+      const events = await readdir(eventsDir)
 
-      for await (const command of commands) { //pera vou fazer um cmd de base la
-        const commandClassFile = join(categoriesDir.toString(), category, command)
-        const commandFi = (await import(commandClassFile));
-        console.log(commandFi)
-        const commandClass = new commandFi.Command()
-        console.log(commandClass)
-        this.commands.set(commandClass.event, commandClass.data)
-        console.log(`[+] Evento ${commandClass.event} carregado com sucesso`)
+      for await (const event of events) {
+        const eventClassFile = join(categoriesDir.toString(), category, event)
+        const eventFile = (await import(eventClassFile)).default;
+        const eventClass: IEvent = new eventFile();
 
-        this.client.on(`${commandClass.event}`, commandClass.runner)
+        console.log(`[+] Evento ${eventClass.event} carregado com sucesso`)
+        this.client.on(eventClass.event, eventClass.runner)
       }
     }
   }
-
-  //bora fazer o login antes só pra ver como ta
 
   login() {
     this.client.login(this.token)
