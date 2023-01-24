@@ -1,9 +1,11 @@
 import { Lunary } from '$lib/Client.js'
 import { EnvLoader } from '$lib/EnvLoader.js';
-import { pino } from '$lib/Logger'
+import { join } from 'node:path';
+import { importx, dirname } from '@discordx/importer'
+
 EnvLoader();
 
-pino.info(`[*] bot iniciado com sucesso!`);
+await importx(join(dirname(import.meta.url), '..', '**', '*.{event,command}.{ts,js}'))
 
 export const lunary = new Lunary();
 export default lunary

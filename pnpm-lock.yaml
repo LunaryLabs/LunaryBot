@@ -1,10 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@discordx/importer': ^1.1.10
   '@types/node': ^18.11.18
   discord.js: ^14.7.1
+  discordx: ^11.5.2
   dotenv: ^16.0.3
-  moment: ^2.29.4
   moment-duration-format: ^2.3.2
   pino: ^8.8.0
   pino-pretty: ^9.1.1
@@ -12,8 +13,9 @@ specifiers:
   typescript: ^4.9.4
 
 dependencies:
+  '@discordx/importer': 1.1.10
   discord.js: 14.7.1
-  moment: 2.29.4
+  discordx: 11.5.2_discord.js@14.7.1
   moment-duration-format: 2.3.2
   pino: 8.8.0
   pino-pretty: 9.1.1
@@ -60,6 +62,28 @@ packages:
   /@discordjs/util/0.1.0:
     resolution: {integrity: sha512-e7d+PaTLVQav6rOc2tojh2y6FE8S7REkqLldq1XF4soCx74XB/DIjbVbVLtBemf0nLW77ntz0v+o5DytKwFNLQ==}
     engines: {node: '>=16.9.0'}
+    dev: false
+
+  /@discordx/di/3.0.3:
+    resolution: {integrity: sha512-aLjThqw6/FJNxHrDXFwiWUnbN5MKnt2Ef99Ry6sH4SiIqbM1MRCSM4nsPxnTuR5+noM9hKD6nYSoNaAGjaMcYQ==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+    dependencies:
+      tsyringe: 4.7.0
+      typedi: 0.10.0
+    dev: false
+
+  /@discordx/importer/1.1.10:
+    resolution: {integrity: sha512-cR8qwQZV7S6CoV+Fw+pcyWAfChyUQZySLe+ByTDLE4gdz4jVL7qqdlWt7G1KrZWSToapJuq2k4M7g3jdVJo6nQ==}
+    dependencies:
+      glob: 8.1.0
+      tslib: 2.4.1
+    dev: false
+
+  /@discordx/internal/1.0.2:
+    resolution: {integrity: sha512-+vv5QS133O3TDDBvPp+ugQy5ExCFjVTxVn5AwQRgwpKNyXSplarNXA4TzACuiYBnXb6ecwtjfbDLcy/xMjYIoQ==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+    dependencies:
+      tslib: 2.4.1
     dev: false
 
   /@esbuild-kit/cjs-loader/2.4.1:
@@ -207,6 +231,19 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /discordx/11.5.2_discord.js@14.7.1:
+    resolution: {integrity: sha512-A+9eco59BZ84/bgKzNH0bvW8vqzzbYXIP/JT+HT6HVPanS68C7hJ6BSmcBr8W7x5iBYMoXU+A2GSaGGk1XiCXA==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+    peerDependencies:
+      discord.js: '>=14 || ^14.0.0-dev'
+    dependencies:
+      '@discordx/di': 3.0.3
+      '@discordx/internal': 1.0.2
+      discord.js: 14.7.1
+      lodash: 4.17.21
+      tslib: 2.4.1
     dev: false
 
   /dotenv/16.0.3:
@@ -543,10 +580,6 @@ packages:
     resolution: {integrity: sha512-cBMXjSW+fjOb4tyaVHuaVE/A5TqkukDWiOfxxAjY+PEqmmBQlLwn+8OzwPiG3brouXKY5Un4pBjAeB6UToXHaQ==}
     dev: false
 
-  /moment/2.29.4:
-    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
-    dev: false
-
   /on-exit-leak-free/2.1.0:
     resolution: {integrity: sha512-VuCaZZAjReZ3vUwgOB8LxAosIurDiAW0s13rI1YwmaP++jvcxP77AWoQvenZebpCA2m8WC1/EosPYPMjnRAp/w==}
     dev: false
@@ -739,6 +772,10 @@ packages:
     resolution: {integrity: sha512-zvHx3VM83m2WYCE8XL99uaM7mFwYSkjR2OZti98fabHrwkjsCvgwChda5xctein3xGOyaQhtTeDq/1H/GNvF3A==}
     dev: false
 
+  /tslib/1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    dev: false
+
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
     dev: false
@@ -753,6 +790,17 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /tsyringe/4.7.0:
+    resolution: {integrity: sha512-ncFDM1jTLsok4ejMvSW5jN1VGPQD48y2tfAR0pdptWRKYX4bkbqPt92k7KJ5RFJ1KV36JEs/+TMh7I6OUgj74g==}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      tslib: 1.14.1
+    dev: false
+
+  /typedi/0.10.0:
+    resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
+    dev: false
 
   /typescript/4.9.4:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}

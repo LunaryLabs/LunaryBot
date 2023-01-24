@@ -11,8 +11,9 @@
     "prod": "node dist/index.js"
   },
   "dependencies": {
+    "@discordx/importer": "^1.1.10",
     "discord.js": "^14.7.1",
-    "moment": "^2.29.4",
+    "discordx": "^11.5.2",
     "moment-duration-format": "^2.3.2",
     "pino": "^8.8.0",
     "pino-pretty": "^9.1.1"
