@@ -1,7 +1,4 @@
 import { SlashCommandBuilder, CommandInteraction } from 'discord.js'
-
-import moment from 'moment'
-
 class Command {
   data: SlashCommandBuilder
   
@@ -12,8 +9,8 @@ class Command {
   }
   
   async runner(interaction: CommandInteraction): Promise<any> {
-    const uptime = moment.duration(interaction.client.uptime)
-    interaction.reply(`> ${uptime}`)
+    interaction.reply(`<t:${~~((Date.now() - interaction.client.uptime) / 1000)}> (<t:${~~((Date.now() - interaction.client.uptime) / 1000)}:R>)`)
+    console.log(interaction.client.uptime)
   }
 }
 export default Command;
