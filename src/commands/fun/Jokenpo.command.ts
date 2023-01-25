@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 
 @Discord()
@@ -20,7 +20,7 @@ export abstract class JokenpoCommand {
     })
     userChoice: string,
 
-    interaction: CommandInteraction,
+    interaction: ChatInputCommandInteraction,
   ) {
     await interaction.deferReply();
 
