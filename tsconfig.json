@@ -24,7 +24,8 @@
       "$types/*": ["./src/types/*"],
       "$commands/*": ["./src/commands/*"],
       "$events/*": ["./src/events/*"],
-      "$/*": ["./*"]
+      "$/*": ["./*"],
+      "$types": ["./src/types"]
     },   
   },
 
