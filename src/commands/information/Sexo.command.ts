@@ -1,5 +1,5 @@
-import { CommandInteraction } from 'discord.js';
-import { Discord, Slash } from 'discordx'
+import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js';
+import { Discord, Slash, SlashOption } from 'discordx'
 
 @Discord()
 export abstract class SexoCommand {
