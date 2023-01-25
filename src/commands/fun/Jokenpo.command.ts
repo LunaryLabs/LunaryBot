@@ -1,6 +1,5 @@
-import { random } from "$lib/Common";
 import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
-import { Client, Discord, Slash, SlashChoice, SlashOption } from "discordx";
+import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 
 @Discord()
 export abstract class JokenpoCommand {
@@ -27,6 +26,8 @@ export abstract class JokenpoCommand {
 
     const botChoices = ["rock", "paper", "scissors"];
     const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
+
+    interaction.member?.roles
 
     // 0 = Tie
     // 1 = Player Wins
