@@ -49,10 +49,6 @@ export class Lunary {
       silent: false,
     });
 
-    this.login();
-  }
-
-  async login() {
-    await this.client.login(this.token);
+    this.client.login(this.token);
   }
 }
