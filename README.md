@@ -1,10 +1,9 @@
 # Lunary Labs
 
-![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/LunaryLabs/LunaryBot?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/LunaryLabs/LunaryBot?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
+![Total Lines](https://img.shields.io/tokei/lines/github/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
 
 <img src="https://media.discordapp.net/attachments/1067468183918891058/1067790316855369798/image.png" alt="lunary-bot">
 
@@ -62,7 +61,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
           <b>Tysaiw#9767</b>
         </sub>
       </a>
-    </td> 
+    </td>
     <td align="center">
       <a href="#">
         <img src="https://images-ext-2.discordapp.net/external/eHRRdV8Kzkm6hAEushpoQCZUnDiFIvJgkcwU93s3XDA/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/813360309171519488/8b1a31ff6f1f2be8fd654a815e0687ee.webp?width=468&height=468" width="100px;" alt="photo"/><br>
