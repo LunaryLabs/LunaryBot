@@ -1,6 +1,5 @@
 import { ApplicationCommandOptionType, RoleManager, CommandInteraction, GuildMember, GuildMemberRoleManager, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
 import { Discord, Slash, SlashOption, SlashChoice } from 'discordx'
-import { SexoCommand } from './Sexo.command';
 
 @Discord()
 export abstract class BanCommand {
