@@ -1,5 +1,5 @@
-import { ActivityType, GatewayIntentBits, Partials } from 'discord.js'
 import { Client } from 'discordx'
+import { LunaryIntentsBits, LunaryPartials, LunaryActivityType }  from '$types/types.lunary';
 
 export class Lunary {
   private token: string;
@@ -14,30 +14,18 @@ export class Lunary {
 
       // Discord intents
       intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.DirectMessageReactions,
+        LunaryIntentsBits.all
       ],
 
       // Discord partials
-      partials: [
-        Partials.User,
-        Partials.Channel,
-        Partials.Message,
-        Partials.Reaction,
-        Partials.GuildMember,
-        Partials.ThreadMember,
-      ],
+      partials: LunaryPartials,
 
       // Bot Presense
       presence: {
         activities: [
           {
             name: 'Lunary Labs',
-            type: ActivityType.Watching
+            type: LunaryActivityType.Watching
           }
         ],
         status: 'dnd'
