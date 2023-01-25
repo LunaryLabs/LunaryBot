@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, RoleManager, CommandInteraction, GuildMember, GuildMemberRoleManager, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
+import { ApplicationCommandOptionType, GuildMember, GuildMemberRoleManager, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
 import { Discord, Slash, SlashOption, SlashChoice } from 'discordx'
 
 @Discord()
@@ -47,6 +47,7 @@ export abstract class BanCommand {
       if(user.id === interaction.user.id) return interaction.editReply({ content: "Você não pode se banir karalho"})
       if(!interaction.guild?.members.me?.permissions.has('BanMembers')) return interaction.editReply({ content: "Eu não tenho permissão para banir ninguem!"})
       if(!perms.has('BanMembers')) return interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões."})
+      
       user.ban({reason: reason, deleteMessageSeconds: dias[days]}).then(() => {
         interaction.editReply({ content: "usuário banido com sucesso!"})
       }).catch((err) => {
@@ -54,4 +55,5 @@ export abstract class BanCommand {
         interaction.editReply({ content: "Não foi possivel banir este usuário"})
       })
   }
+
 };

@@ -20,6 +20,10 @@ export class Lunary {
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildIntegrations,
+        GatewayIntentBits.AutoModerationConfiguration
       ],
 
       // Discord partials
