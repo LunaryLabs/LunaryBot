@@ -1,75 +1,58 @@
-import { Client, BitFieldResolvable, GatewayIntentsString, GatewayIntentBits, SlashCommandBuilder } from 'discord.js'
-import { readdir } from 'node:fs/promises'
+import { ActivityType, GatewayIntentBits, Partials } from 'discord.js'
 import { join } from 'node:path'
-
-import type { ICommand } from '$types/Command'
-import type { IEvent } from '$types/Event'
+import { Client } from 'discordx'
+import { importx, dirname } from '@discordx/importer'
 
 export class Lunary {
   private token: string;
-  private intents: BitFieldResolvable<GatewayIntentsString, number>;
   public client: Client;
-  public commands: Array<ICommand>;
 
-  constructor() {
-    this.token = process.env['TOKEN'] ?? ''
-    this.intents = [
-      GatewayIntentBits.Guilds,
-      GatewayIntentBits.GuildMembers,
-      GatewayIntentBits.GuildMessages,
-      GatewayIntentBits.MessageContent,
-    ],
-    
-    this.commands = []; 
-  
+  constructor(token?: string) {
+    this.token = String(token ?? process.env['TOKEN']);
+
     this.client = new Client({
-      intents: this.intents,
-    })
+      // To use only guild command
+      // botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
 
-    this.login()
-    this.loadCommands()
-    this.loadEvents()
+      // Discord intents
+      intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+      ],
+
+      // Discord partials
+      partials: [
+        Partials.User,
+        Partials.Channel,
+        Partials.Message,
+        Partials.Reaction,
+        Partials.GuildMember,
+        Partials.ThreadMember,
+      ],
+
+      // Bot Presense
+      presence: {
+        activities: [
+          {
+            name: 'Lunary Labs',
+            type: ActivityType.Watching
+          }
+        ],
+        status: 'dnd'
+      },
+
+      // Other
+      closeTimeout: 10,
+      failIfNotExists: true,
+      silent: true,
+    });
+
+    this.login();
   }
 
-  async loadCommands(): Promise<void> {
-    const categoriesDir = new URL('../commands/', import.meta.url)
-    const categories = await readdir(categoriesDir);
-
-    for await (const category of categories) {
-      const commandsDir = new URL(category, categoriesDir)
-      const commands = await readdir(commandsDir)
-
-      for await (const command of commands) { //pera vou fazer um cmd de base la
-        const commandClassFile = join(categoriesDir.toString(), category, command)
-        const commandFile = (await import(commandClassFile)).default;
-        const commandClass: ICommand = new commandFile()
-        
-        this.commands.push(commandClass)
-        console.log(`[/] comando ${commandClass.data.name} carregado com sucesso`)
-      }
-    }
-  }
-
-  async loadEvents(): Promise<void> {
-    const categoriesDir = new URL('../events/', import.meta.url)
-    const categories = await readdir(categoriesDir);
-
-    for await (const category of categories) {
-      const eventsDir = new URL(category, categoriesDir)
-      const events = await readdir(eventsDir)
-
-      for await (const event of events) {
-        const eventClassFile = join(categoriesDir.toString(), category, event)
-        const eventFile = (await import(eventClassFile)).default;
-        const eventClass: IEvent = new eventFile();
-
-        console.log(`[+] Evento ${eventClass.event} carregado com sucesso`)
-        this.client.on(eventClass.event, eventClass.runner)
-      }
-    }
-  }
-
-  login() {
-    this.client.login(this.token)
+  async login() {
+    await this.client.login(this.token);
   }
 }

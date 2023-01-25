@@ -1,18 +1,22 @@
-import { SlashCommandBuilder, CommandInteraction, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from 'discord.js'
-import { ICommand } from '$types/Command'
+import {
+  ChatInputCommandInteraction,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+  EmbedBuilder,
+} from 'discord.js'
+import { Discord, Slash } from 'discordx'
 
-class Command implements ICommand {
-  data: SlashCommandBuilder
-  
-  constructor() {
-    this.data = new SlashCommandBuilder()
-      .setName('invite')
-      .setDescription('Get the bot\'s invite link');
-  }
-  
-  async runner(interaction: CommandInteraction): Promise<any> {
+@Discord()
+export abstract class InviteCommand {
+  @Slash({
+    name: 'invite',
+    description: 'Get bot\'s invite!',
+    dmPermission: true
+  })
+  async Handler(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
-  
+
     const infoEmbed = new EmbedBuilder()
       .setTitle('LunaryLabs')
       .setDescription('This bot was made by a completely random team of people who don\'t even know each other but worked together to create a cool bot. We hope with all the love and affection that you like it! <3')
@@ -22,7 +26,7 @@ class Command implements ICommand {
       .setLabel("Invite")
       .setStyle(ButtonStyle.Link)
       .setURL(`https://discord.com/api/oauth2/authorize?client_id=1067487736447127593&permissions=8&scope=bot%20applications.commands`);
-    
+
     const githubButton = new ButtonBuilder()
       .setLabel("Github")
       .setStyle(ButtonStyle.Link)
@@ -43,8 +47,5 @@ class Command implements ICommand {
       embeds: [infoEmbed],
       components: [buttonRow]
     })
-
   }
 }
-
-export default Command;
