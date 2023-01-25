@@ -1,7 +1,5 @@
 import { ActivityType, GatewayIntentBits, Partials } from 'discord.js'
-import { join } from 'node:path'
 import { Client } from 'discordx'
-import { importx, dirname } from '@discordx/importer'
 
 export class Lunary {
   private token: string;
@@ -22,8 +20,6 @@ export class Lunary {
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.DirectMessageReactions,
-        GatewayIntentBits.GuildIntegrations,
-        GatewayIntentBits.AutoModerationConfiguration
       ],
 
       // Discord partials
@@ -50,7 +46,7 @@ export class Lunary {
       // Other
       closeTimeout: 10,
       failIfNotExists: true,
-      silent: true,
+      silent: false,
     });
 
     this.login();
