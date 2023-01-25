@@ -1,7 +1,7 @@
 import { ActivityType } from 'discord.js'
 import { Discord, ArgsOf, Once, Client } from 'discordx';
 
-import { pino } from '$lib/Logger';
+import { pino } from '$lib/Logger'; //logger
 
 @Discord()
 export abstract class ReadyEvent {
@@ -40,15 +40,15 @@ export abstract class ReadyEvent {
       const syncCommandsFail = '[!!] Error when synchronizing global commands...';
 
       // Log fail
-      pino.error(syncCommandsFail);
+     pino.error(syncCommandsFail);
     }
 
     // To clear all guild commands, uncomment this line,
     // This is useful when moving from guild commands to global commands
     // It must only be executed once
 
-    //  await bot.clearApplicationCommands(
-    //    ...bot.guilds.cache.map((g) => g.id)
+    //  await client.clearApplicationCommands(
+    //    ...client.guilds.cache.map((g) => g.id)
     //  ),
 
     // When connected
