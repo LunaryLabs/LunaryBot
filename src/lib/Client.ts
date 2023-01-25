@@ -5,8 +5,8 @@ export class Lunary {
   private token: string;
   public client: Client;
 
-  constructor(token?: string) {
-    this.token = String(token ?? process.env['TOKEN']);
+  constructor() {
+    this.token = String(process.env['TOKEN']);
 
     this.client = new Client({
       // To use only guild command
