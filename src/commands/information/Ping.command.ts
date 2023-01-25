@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 import { Discord, Slash } from 'discordx'
 
 @Discord()
@@ -8,7 +8,7 @@ export abstract class PingCommand {
     description: 'Return with Pong!',
     dmPermission: true
   })
-  async Handler(interaction: CommandInteraction) {
+  async Handler(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
     await interaction.editReply(`${interaction.client.ws.ping}ms!`);
   }
