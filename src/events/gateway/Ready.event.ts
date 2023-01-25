@@ -1,7 +1,7 @@
 import { ActivityType } from 'discord.js'
 import { Discord, ArgsOf, Once, Client } from 'discordx';
 
-import { pino } from '$lib/Logger';
+import { pino } from '$lib/Logger'; //logger
 
 @Discord()
 export abstract class ReadyEvent {
