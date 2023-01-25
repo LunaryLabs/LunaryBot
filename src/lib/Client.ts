@@ -32,6 +32,17 @@ export class Lunary {
         Partials.ThreadMember,
       ],
 
+      // Bot Presense
+      presence: {
+        activities: [
+          {
+            name: 'Lunary Labs',
+            type: ActivityType.Watching
+          }
+        ],
+        status: 'dnd'
+      },
+
       // Other
       closeTimeout: 10,
       failIfNotExists: true,
