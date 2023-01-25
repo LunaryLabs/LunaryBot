@@ -1,0 +1,8 @@
+.vscode/*
+pnpm-lock.json
+package.json
+LICENSE.md
+README.md
+tsconfig.json
+.env.example
+.editorconfig
