@@ -1,59 +1,104 @@
-import { ApplicationCommandOptionType, GuildMember, GuildMemberRoleManager, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
-import { Discord, Slash, SlashOption, SlashChoice } from 'discordx'
+import {
+  ApplicationCommandOptionType,
+  GuildMember,
+  GuildMemberRoleManager,
+  ChatInputCommandInteraction,
+  PermissionsBitField
+} from 'discord.js';
+
+import {
+  Discord,
+  Slash,
+  SlashOption,
+  SlashChoice
+} from 'discordx';
 
 @Discord()
 export abstract class BanCommand {
   @Slash({
     name: 'ban',
     description: 'ban command with coisas aleatórias',
-    dmPermission: true
+    dmPermission: false
   })
   async Handler(
     @SlashOption({
-        type: ApplicationCommandOptionType.User,
-        name: 'user',
-        description: 'user with ban',
-        required: true
+      name: 'user',
+      description: 'user with ban',
+      type: ApplicationCommandOptionType.User,
+      required: true
     })
     user: GuildMember,
+
     @SlashOption({
-      type: ApplicationCommandOptionType.String,
       name: 'reason',
-      description: 'reason ban'
+      description: 'reason ban',
+      type: ApplicationCommandOptionType.String,
+      required: true
     })
-    reason:string,
+    reason: string,
 
     @SlashChoice({ name: "7-days", value: "7-days" })
     @SlashChoice({ name: "14-days", value: "14-days" })
     @SlashOption({
-      type: ApplicationCommandOptionType.String,
       name: 'delete-messages',
       description: 'delete messages time',
+      type: ApplicationCommandOptionType.String,
       required: false
     })
     days: string,
 
     interaction: ChatInputCommandInteraction
-    ): Promise<any> {
-      await interaction.deferReply()
-      let role = interaction.member?.roles as GuildMemberRoleManager
-      let perms = interaction.member?.permissions as PermissionsBitField
-      let dias: Record<string, number> = {
-        "7-days": 7,
-        "14-days": 14
-      }
-      if(user.roles.highest.rawPosition > role.highest.rawPosition) return interaction.editReply({ content: "vai tomar no teu cu"})
-      if(user.id === interaction.client.user.id) return interaction.editReply({ content: "ta tentando me banir porra"})
-      if(user.id === interaction.user.id) return interaction.editReply({ content: "Você não pode se banir karalho"})
-      if(!interaction.guild?.members.me?.permissions.has('BanMembers')) return interaction.editReply({ content: "Eu não tenho permissão para banir ninguem!"})
-      if(!perms.has('BanMembers')) return interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões."})
-      
-      user.ban({reason: reason, deleteMessageSeconds: dias[days]}).then(() => {
-        interaction.editReply({ content: "usuário banido com sucesso!"})
-      }).catch((err) => {
-        console.log(err)
-        interaction.editReply({ content: "Não foi possivel banir este usuário"})
-      })
+  ) {
+    await interaction.deferReply();
+
+    const roles = interaction.member?.roles as GuildMemberRoleManager;
+    const permissions = interaction.member?.permissions as PermissionsBitField;
+
+    const dias: Record<string, number> = {
+      "7-days": 7,
+      "14-days": 14
+    }
+
+    // If the user tries to ban an user above
+    if (user.roles.highest.rawPosition > roles.highest.rawPosition) {
+      await interaction.editReply({ content: "vai tomar no teu cu" });
+      return;
+    }
+
+    // If the user tries to ban the bot
+    if (user.id === interaction.client.user.id) {
+      await interaction.editReply({ content: "ta tentando me banir porra" });
+      return;
+    }
+
+    // If the user tries to ban himself
+    if (user.id === interaction.user.id) {
+      await interaction.editReply({ content: "Você não pode se banir karalho" });
+      return;
+    }
+
+    // If the bot don't have the 'BanMembers' permission
+    if (!interaction.guild?.members.me?.permissions.has('BanMembers')) {
+      await interaction.editReply({ content: "Eu não tenho permissão para banir ninguem!" });
+      return;
+    }
+
+    // If the user bot don't have the 'BanMembers' permission
+    if (!permissions.has('BanMembers')) {
+      await interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões." });
+      return;
+    }
+
+
+    try {
+      // Ban the user
+      await user.ban({ reason: reason, deleteMessageSeconds: dias[days] });
+
+      // And tell's the user
+      await interaction.editReply({ content: "usuário banido com sucesso!" });
+    } catch (err) {
+      await interaction.editReply({ content: "Não foi possivel banir este usuário" });
+    }
   }
 
 };
