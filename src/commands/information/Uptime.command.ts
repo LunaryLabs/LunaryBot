@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js'
+import { ChatInputCommandInteraction } from 'discord.js'
 import { Discord, Slash } from 'discordx'
 
 @Discord()
@@ -8,7 +8,7 @@ export abstract class UptimeCommand {
     description: 'Pick bot Uptime!',
     dmPermission: true
   })
-  async runner(interaction: CommandInteraction): Promise<any> {
+  async runner(interaction: ChatInputCommandInteraction): Promise<any> {
     await interaction.deferReply();
     await interaction.editReply(`<t:${~~((Date.now() - interaction.client.uptime) / 1000)}> (<t:${~~((Date.now() - interaction.client.uptime) / 1000)}:R>)`)
   }
