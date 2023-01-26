@@ -35,7 +35,6 @@ export abstract class JokenpoCommand {
     let result = 0;
 
     if (botChoice == userChoice) result = 0;
-    console.log("sexo")
 
     // Rock
     if (botChoice == 'rock' && userChoice == 'scissors') result = 2;
