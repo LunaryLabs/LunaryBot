@@ -9,7 +9,7 @@ export abstract class Invite {
     dmPermission: true
   })
   async Handler(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply();
+    await interaction.deferReply(); //e
 
     const infoEmbed = new EmbedBuilder()
       .setTitle('LunaryLabs')
