@@ -18,5 +18,11 @@ await importx(
   join(dirBase, '*.event.{ts,js}'),
   join(dirBase, '*.command.{ts,js}')
 )
+
+// Import Command and Events
+await importx(
+  join(dirBase, '*.event.{ts,js}'),
+  join(dirBase, '*.command.{ts,js}')
+)
 export const lunary = new Lunary();
 export default lunary

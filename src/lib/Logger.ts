@@ -13,7 +13,7 @@ const pretty = PinoPretty({
 export const pino = Pino(
   {
     // Info of the Logger
-    name: 'LunaryBot', //nome da log
+    name: 'LunaryBot',
     enabled: true,
     timestamp: false,
     safe: true,

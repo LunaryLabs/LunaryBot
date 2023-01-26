@@ -3,36 +3,48 @@ import { ActivityType, GatewayIntentBits, Partials } from 'discord.js';
 export const LunaryIntentsBits: Record<string, GatewayIntentBits[]> = {
   // Intents for Production
   main: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
+    // GatewayIntentBits.AutoModerationConfiguration,
+    // GatewayIntentBits.AutoModerationExecution,
+    // GatewayIntentBits.DirectMessageReactions,
+    // GatewayIntentBits.DirectMessageTyping,
     GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageReactions,
+    // GatewayIntentBits.GuildBans,
+    // GatewayIntentBits.GuildEmojisAndStickers,
+    // GatewayIntentBits.GuildIntegrations,
+    // GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildMembers,
+    // GatewayIntentBits.GuildMessageReactions,
+    // GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.GuildMessages,
+    // GatewayIntentBits.GuildPresences,
+    // GatewayIntentBits.GuildScheduledEvents,
+    // GatewayIntentBits.GuildVoiceStates,
+    // GatewayIntentBits.GuildWebhooks,
+    // GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent
   ],
 
   // Intents for Development
   canary: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.AutoModerationConfiguration,
+    GatewayIntentBits.AutoModerationExecution,
+    GatewayIntentBits.DirectMessageReactions,
+    GatewayIntentBits.DirectMessageTyping,
+    GatewayIntentBits.DirectMessages,
     GatewayIntentBits.GuildBans,
     GatewayIntentBits.GuildEmojisAndStickers,
     GatewayIntentBits.GuildIntegrations,
-    GatewayIntentBits.GuildWebhooks,
     GatewayIntentBits.GuildInvites,
-    GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.GuildMessageTyping,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageReactions,
-    GatewayIntentBits.DirectMessageTyping,
-    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildScheduledEvents,
-    GatewayIntentBits.AutoModerationConfiguration,
-    GatewayIntentBits.AutoModerationExecution,
-    GatewayIntentBits.GuildPresences
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.MessageContent
   ]
 }
 
@@ -41,7 +53,15 @@ export const LunaryPartials = [
   Partials.Channel,
   Partials.Message,
   Partials.Reaction,
-  Partials.GuildMember
+  Partials.GuildMember,
+
+  Partials.User,
+  Partials.Channel,
+  Partials.GuildMember,
+  Partials.Message,
+  // Partials.Reaction,
+  // Partials.GuildScheduledEvent,
+  // Partials.ThreadMember,
 ]
 
 export const LunaryActivityType = ActivityType;
