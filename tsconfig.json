@@ -24,9 +24,9 @@
       "$types/*": ["./src/types/*"],
       "$commands/*": ["./src/commands/*"],
       "$events/*": ["./src/events/*"],
-      "$/*": ["./*"],
-      "$plugins/*": ["./src/plugins/*"]
-    },   
+      "$plugins/*": ["./src/plugins/*"],
+      "$/*": ["./*"]
+    },
   },
 
   "buildOptions": {

@@ -1,6 +1,6 @@
 export async function getAnime(animeName: string) {
 
-        //Faz a requisição à API externa
+        // Faz a requisição à API externa
         const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeName}`)
         const anime = await response.json()
 
