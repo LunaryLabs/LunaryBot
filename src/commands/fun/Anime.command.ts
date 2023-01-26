@@ -44,20 +44,20 @@ export abstract class AnimeCommand {
 
     let row = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(button)
-    
+
 
     let embed_nsfw = new EmbedBuilder()
         .setTitle(`Nsfw Content`)
         .setDescription('Animes searched here may possibly have nsfw content, do you claim to be over 18?')
         .setColor('#fc1605')
 
-    
+
     interaction.editReply({ embeds: [embed_nsfw], components: [row]})
   }
 
   @ButtonComponent({ id: "anime-view" })
   handler(interaction: ButtonInteraction): void {
-    
+
     let embed = new EmbedBuilder()
         .setTitle(res?.title + ` [${res?.rating}]`)
         .setDescription(res?.synopsis)

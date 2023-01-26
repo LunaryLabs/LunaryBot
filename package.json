@@ -16,8 +16,11 @@
     "discord.js": "^14.7.1",
     "discordx": "^11.5.2",
     "moment-duration-format": "^2.3.2",
+    "pg": "^8.8.0",
     "pino": "^8.8.0",
-    "pino-pretty": "^9.1.1"
+    "pino-pretty": "^9.1.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.11"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

@@ -51,11 +51,11 @@ export const LunaryIntentsBits: Record<string, GatewayIntentBits[]> = {
 export const LunaryPartials = [
   Partials.Channel,
   Partials.GuildMember,
-  Partials.GuildScheduledEvent,
+  // Partials.GuildScheduledEvent,
   Partials.Message,
-  Partials.Reaction,
-  Partials.ThreadMember,
-  Partials.User
+  // Partials.Reaction,
+  // Partials.ThreadMember,
+  // Partials.User
 ]
 
 export const LunaryActivityType = ActivityType;

@@ -1,3 +1,5 @@
+await import("reflect-metadata");
+
 import { dirname, importx } from '@discordx/importer';
 
 import { Lunary } from '$lib/Client.js';
