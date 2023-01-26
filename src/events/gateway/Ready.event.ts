@@ -1,8 +1,11 @@
-import { Discord, ArgsOf, Once, Client } from 'discordx';
+import { ArgsOf, Client, Discord, Once } from 'discordx';
+
+import { perfData } from '$lib/Common';
+import { performance } from 'node:perf_hooks';
 import { pino } from '$lib/Logger';
 
 @Discord()
-export abstract class ReadyEvent {
+export abstract class Ready {
   @Once({ event: 'ready' })
   async Handle([_]: ArgsOf<'ready'>, client: Client) {
     // Make sure all guilds are cached
@@ -50,6 +53,13 @@ export abstract class ReadyEvent {
     //  ),
 
     // When connected
+    const end = performance.now()
+    perfData.set('end', end)
+
+    const startTime = ~~perfData.get('start')!;
+    const endTime = ~~perfData.get('end')!;
+
     pino.info(`[*] Connected to the gateway as ${client.user?.tag}`);
+    pino.info(`[?] Boot time: ${Math.abs(startTime - endTime)}ms`)
   }
 }

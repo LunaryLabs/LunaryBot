@@ -2,9 +2,9 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 
 @Discord()
-export abstract class JokenpoCommand {
+export abstract class Jokenpo {
   @Slash({
-    name: 'joquempo',
+    name: 'jokenpo',
     description: 'Pedra, papel, tesoura!',
     dmPermission: true
   })
@@ -13,8 +13,8 @@ export abstract class JokenpoCommand {
     @SlashChoice({ name: 'Papel', value: 'paper' })
     @SlashChoice({ name: 'Tesoura', value: 'scissors' })
     @SlashOption({
-      name: 'escolha',
-      description: 'Qual escolha você ira utilizar..',
+      name: 'choice',
+      description: 'What\'s is your choice?',
       required: true,
       type: ApplicationCommandOptionType.String
     })
@@ -26,8 +26,6 @@ export abstract class JokenpoCommand {
 
     const botChoices = ["rock", "paper", "scissors"];
     const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
-
-    interaction.member?.roles
 
     // 0 = Tie
     // 1 = Player Wins

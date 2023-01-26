@@ -1,8 +1,9 @@
-import { ChatInputCommandInteraction } from 'discord.js'
-import { Discord, Slash } from 'discordx'
+import { Discord, Slash } from 'discordx';
+
+import { ChatInputCommandInteraction } from 'discord.js';
 
 @Discord()
-export abstract class UptimeCommand {
+export abstract class Uptime {
   @Slash({
     name: 'uptime',
     description: 'Pick bot Uptime!',

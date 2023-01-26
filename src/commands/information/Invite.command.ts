@@ -1,14 +1,8 @@
-import {
-  ChatInputCommandInteraction,
-  ButtonBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  EmbedBuilder,
-} from 'discord.js'
-import { Discord, Slash } from 'discordx'
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+import { Discord, Slash } from 'discordx';
 
 @Discord()
-export abstract class InviteCommand {
+export abstract class Invite {
   @Slash({
     name: 'invite',
     description: 'Get bot\'s invite!',
