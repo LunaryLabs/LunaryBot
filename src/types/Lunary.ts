@@ -30,7 +30,8 @@ export const LunaryIntentsBits: Record<string, GatewayIntentBits[]> = {
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildScheduledEvents,
     GatewayIntentBits.AutoModerationConfiguration,
-    GatewayIntentBits.AutoModerationExecution
+    GatewayIntentBits.AutoModerationExecution,
+    GatewayIntentBits.GuildPresences
   ]
 }
 
