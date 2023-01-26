@@ -12,6 +12,15 @@ perfData.set('start', start)
 config();
 
 const dirBase = join(dirname(import.meta.url), '**')
+<<<<<<< HEAD
+=======
+
+// Import Command and Events
+await importx(
+  join(dirBase, '*.event.{ts,js}'),
+  join(dirBase, '*.command.{ts,js}')
+)
+>>>>>>> c442734 (revert)
 
 // Import Command and Events
 await importx(
