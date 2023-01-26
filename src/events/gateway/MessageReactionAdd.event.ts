@@ -1,9 +1,10 @@
-import { wait } from "$lib/Common";
+import { ArgsOf, Client, Discord, On } from "discordx";
+
 import { pino } from "$lib/Logger";
-import { Client, Discord, On, ArgsOf } from "discordx";
+import { wait } from "$lib/Common";
 
 @Discord()
-export abstract class MessageReactionAddEvent {
+export abstract class MessageReactionAdd {
   @On({ event: 'messageReactionAdd' })
   async Handle([reaction, user]: ArgsOf<'messageReactionAdd'>, client: Client) {
     try {

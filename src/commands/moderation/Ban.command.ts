@@ -1,23 +1,12 @@
-import {
-  ApplicationCommandOptionType,
-  GuildMember,
-  GuildMemberRoleManager,
-  ChatInputCommandInteraction,
-  PermissionsBitField
-} from 'discord.js';
-
-import {
-  Discord,
-  Slash,
-  SlashOption,
-  SlashChoice
-} from 'discordx';
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
+import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
 @Discord()
-export abstract class BanCommand {
+export abstract class Ban {
   @Slash({
     name: 'ban',
     description: 'ban command with coisas aleatórias',
+    defaultMemberPermissions: ['BanMembers'],
     dmPermission: false
   })
   async Handler(
@@ -47,12 +36,13 @@ export abstract class BanCommand {
     })
     days: string,
 
-    interaction: ChatInputCommandInteraction
+    interaction: ChatInputCommandInteraction,
+    client: Client
   ) {
     await interaction.deferReply();
 
     const roles = interaction.member?.roles as GuildMemberRoleManager;
-    const permissions = interaction.member?.permissions as PermissionsBitField;
+    // const permissions = interaction.member?.permissions as PermissionsBitField;
 
     const dias: Record<string, number> = {
       "7-days": 7,
@@ -66,7 +56,7 @@ export abstract class BanCommand {
     }
 
     // If the user tries to ban the bot
-    if (user.id === interaction.client.user.id) {
+    if (user.id === client.user?.id) {
       await interaction.editReply({ content: "ta tentando me banir porra" });
       return;
     }
@@ -84,10 +74,10 @@ export abstract class BanCommand {
     }
 
     // If the user bot don't have the 'BanMembers' permission
-    if (!permissions.has('BanMembers')) {
-      await interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões." });
-      return;
-    }
+    // if (!permissions.has('BanMembers')) {
+    //   await interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões." });
+    //   return;
+    // }
 
 
     try {

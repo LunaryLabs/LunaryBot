@@ -24,9 +24,9 @@
       "$types/*": ["./src/types/*"],
       "$commands/*": ["./src/commands/*"],
       "$events/*": ["./src/events/*"],
-      "$/*": ["./*"],
-      "$types": ["./src/types"]
-    },   
+      "$plugins/*": ["./src/plugins/*"],
+      "$/*": ["./*"]
+    },
   },
 
   "buildOptions": {
@@ -34,7 +34,6 @@
     "incremental": true,
     "traceResolution": true,
   },
-
   "exclude": ["node_modules/", "dist"],
   "include": ["src/"]
 }

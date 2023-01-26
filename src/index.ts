@@ -1,7 +1,13 @@
-import { Lunary } from '$lib/Client.js'
-import { config } from 'dotenv'
+import { dirname, importx } from '@discordx/importer';
+
+import { Lunary } from '$lib/Client.js';
+import { config } from 'dotenv';
 import { join } from 'node:path';
-import { importx, dirname } from '@discordx/importer'
+import { perfData } from '$lib/Common';
+import { performance } from 'node:perf_hooks';
+
+const start = performance.now();
+perfData.set('start', start)
 
 config();
 

@@ -1,8 +1,9 @@
+import { ArgsOf, Client, Discord, On } from 'discordx';
+
 import { pino } from '$lib/Logger';
-import { Discord, On, ArgsOf, Client } from 'discordx'
 
 @Discord()
-export abstract class InteractionCreateEvent {
+export abstract class InteractionCreate {
   @On({ event: 'interactionCreate' })
   async Handle([interaction]: ArgsOf<'interactionCreate'>, client: Client): Promise<void> {
     try {
@@ -12,7 +13,16 @@ export abstract class InteractionCreateEvent {
       const failInteraction = 'Falha ao executar essa interação...';
 
       // And Reply to the User!
-      if (interaction.isRepliable()) interaction.reply(failInteraction);
+      if (interaction.isRepliable()) {
+        switch (interaction.deferred || interaction.replied) {
+          case true:
+            await interaction.editReply(failInteraction)
+            break;
+          case false:
+            await interaction.reply(failInteraction);
+            break;
+        }
+      };
 
       // Log Error
       pino.error(err);
