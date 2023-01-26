@@ -3,6 +3,7 @@ import { ActivityType, GatewayIntentBits, Partials } from 'discord.js';
 export const LunaryIntentsBits: Record<string, GatewayIntentBits[]> = {
   // Intents for Production
   main: [
+    GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMessageReactions,

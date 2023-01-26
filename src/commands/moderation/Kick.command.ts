@@ -35,7 +35,7 @@ export abstract class Ban {
     // const permissions = interaction.member?.permissions as PermissionsBitField;
 
     // If the user tries to ban an user above
-    if (user.roles.highest.rawPosition > roles.highest.rawPosition) {
+    if (user.roles?.highest?.rawPosition > roles?.highest?.rawPosition) {
       await interaction.editReply({ content: "vai tomar no teu cu" });
       return;
     }
