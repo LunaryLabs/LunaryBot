@@ -1,9 +1,13 @@
 # Lunary Labs
 
-![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![Total Lines](https://img.shields.io/tokei/lines/github/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/LunaryLabs?color=635bff&logo=github&style=for-the-badge)
+![Total Lines](https://img.shields.io/tokei/lines/github/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/LunaryLabs/LunaryBot?color=635bff&logo=snyk&style=for-the-badge)
+![Discord](https://img.shields.io/discord/1067454972876300400?color=635bff&logo=discord&style=for-the-badge)
+![License](https://img.shields.io/github/license/LunaryLabs/LunaryBot?color=635bff&logo=apache&style=for-the-badge)
 
 <img src="https://media.discordapp.net/attachments/1067468183918891058/1067790316855369798/image.png" alt="lunary-bot">
 
@@ -13,10 +17,10 @@
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-* Você instalou a versão mais recente de `node.js`
-* Você instalou a versão mais recente de `pnpm`
-* Você instalou a versão mais recente de `tsx`
-* Você instalou a versão mais recente de `typescript`
+- Você instalou a versão mais recente de `node.js`
+- Você instalou a versão mais recente de `pnpm`
+- Você instalou a versão mais recente de `tsx`
+- Você instalou a versão mais recente de `typescript`
 
 ## 🚀 Instalando Lunary Bot
 
@@ -56,7 +60,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://media.discordapp.net/attachments/1056787559453302824/1067140535137083423/55de0221e7f2b6d3a3c07feddd6b7e28.png" width="100px;" alt="photo"/><br>
+        <img src="https://cdn.discordapp.com/avatars/832723828932476989/55de0221e7f2b6d3a3c07feddd6b7e28.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
           <b>Tysaiw#9767</b>
         </sub>
@@ -64,7 +68,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
     </td>
     <td align="center">
       <a href="#">
-        <img src="https://images-ext-2.discordapp.net/external/eHRRdV8Kzkm6hAEushpoQCZUnDiFIvJgkcwU93s3XDA/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/813360309171519488/8b1a31ff6f1f2be8fd654a815e0687ee.webp?width=468&height=468" width="100px;" alt="photo"/><br>
+        <img src="https://cdn.discordapp.com/avatars/813360309171519488/8b1a31ff6f1f2be8fd654a815e0687ee.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
           <b>GabriewF#2298</b>
         </sub>
@@ -72,7 +76,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
     </td>
     <td align="center">
       <a href="#">
-        <img src="https://images-ext-1.discordapp.net/external/xxPb-RTOFFJsTipUSKUodCoDnmniVKRtKjsyxgPVtb0/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/949857700517384192/d859d9a82badc344171f40af967b7116.webp?width=468&height=468" width="100px;" alt="photo"/><br>
+        <img src="https://cdn.discordapp.com/avatars/949857700517384192/d859d9a82badc344171f40af967b7116.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
           <b>mudinho#2551</b>
         </sub>
@@ -80,7 +84,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
     </td>
     <td align="center">
       <a href="#">
-        <img src="https://images-ext-2.discordapp.net/external/R3YXq4D35CZSSRbRASNZcE4gNZfOOWBRCoSL4Sw_oW0/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/541348190746574848/2ba59e3595b615df72761664583dc521.webp?width=468&height=468" width="100px;" alt="photo"/><br>
+        <img src="https://cdn.discordapp.com/avatars/541348190746574848/2ba59e3595b615df72761664583dc521.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
           <b>assiscabron#9519</b>
         </sub>
@@ -88,12 +92,19 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
     </td>
     <td align="center">
       <a href="#">
-        <img  src="https://images-ext-2.discordapp.net/external/CY2TCmZ9yphxmBNLPpgdX35kAe3RG2OSHHjarpb7aaU/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/740991944376975480/8581262ac96ee0ca9ae79fd2f76a9951.webp?width=468&height=468" width="100px;" alt="photo"/><br>
+        <img src="https://cdn.discordapp.com/avatars/465859183250767882/8e6ca9d7af1c01cabfbb5ba6dc454fce.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
-          <b></> UnknownBeast#0434</b>
+          <b>bueno.#4181</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://cdn.discordapp.com/avatars/1021873778088759296/b728383d81c32e3b392a9302e28c538e.png?size=4096" width="200px" alt="photo"/><br>
+        <sub>
+          <b>! мαтнєυxz_#9307</b>
         </sub>
       </a>
     </td>
   </tr>
 </table>
-
