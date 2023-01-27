@@ -2,16 +2,16 @@ name: 💡 CodeQL
 
 on:
   push:
-    branches: [ "trunk" ]
+    branches: [ "canary" ]
   pull_request:
-    branches: [ "trunk" ]
+    branches: [ "canary" ]
   schedule:
     - cron: '43 7 * * 4'
 
 jobs:
   analyze:
     name: 📀 Analyze
-    
+
     strategy:
       fail-fast: false
       matrix:
