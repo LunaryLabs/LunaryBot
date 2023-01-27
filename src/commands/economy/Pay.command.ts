@@ -1,10 +1,18 @@
-import { pClient } from "$db/prisma.js";
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember } from "discord.js";
-import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
+import { pClient } from "$database/prisma.js";
+import { ActionRowBuilder, APIInteractionGuildMember, ApplicationCommandOptionType, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberEditData, Message } from "discord.js";
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
 @Discord()
 @SlashGroup("economy")
 export abstract class Pay {
+  quantity: number;
+
+  receiver: GuildMember;
+  payer: GuildMember;
+
+  confirmInteraction: Message;
+  waitingInteraction: Message;
+
   @Slash({
     name: 'pay',
     description: 'Pay someones!',
@@ -17,7 +25,7 @@ export abstract class Pay {
       required: true,
       type: ApplicationCommandOptionType.User
     })
-    user: GuildMember,
+    user: GuildMember | APIInteractionGuildMember,
 
     @SlashOption({
       name: 'quantity',
@@ -25,7 +33,7 @@ export abstract class Pay {
       required: true,
       type: ApplicationCommandOptionType.Integer,
 
-      minValue: 1
+      minValue: 1,
     })
     quantity: number,
 
@@ -33,32 +41,109 @@ export abstract class Pay {
   ) {
     await interaction.deferReply();
 
-    const receiverId = user.id;
+    this.receiver = user as GuildMember;
+    this.quantity = quantity;
 
-    let receiver = await pClient.user.findUnique({
-      where: { id: receiverId }
+    this.payer = interaction.member as GuildMember;
+
+    const waitingEmbed = new EmbedBuilder()
+      .setColor('Yellow')
+      .setDescription(`Aguardando <@${interaction.user.id}> confirmar a transferência...`)
+
+    this.waitingInteraction = await interaction.editReply({
+      embeds: [waitingEmbed]
     })
 
-    if (!receiver) {
-      receiver = await pClient.user.create({
-        data: { id: receiverId }
-      }) as NonNullable<typeof receiver>
-    }
+    await this.HandleConfirmation(interaction);
+  }
 
-    const resultMoney = receiver.money += quantity
+  async HandleConfirmation(interaction: ChatInputCommandInteraction) {
+    const formattedQuantity = Intl.NumberFormat('pt-BR', {
+      currency: 'USD',
+      style: 'currency',
+    }).format(this.quantity)
 
-    await pClient.user.update({
-      where: { id: receiverId },
-      data: { money: resultMoney }
+    const confirmEmbed = new EmbedBuilder()
+      .setTitle("Confirmação")
+      .setDescription(`Você confirma mandar ${formattedQuantity} para <@${this.receiver.id}>`)
+      .setColor('Red');
+
+    const confirmButton = new ButtonBuilder()
+      .setEmoji('✅')
+      .setLabel('Sim')
+      .setStyle(ButtonStyle.Primary)
+      .setCustomId('confirmButton');
+
+    const counteractButton = new ButtonBuilder()
+      .setEmoji('❎')
+      .setLabel('Não')
+      .setStyle(ButtonStyle.Secondary)
+      .setCustomId('cancelButton');
+
+    const confirmRow = new ActionRowBuilder<ButtonBuilder>()
+      .addComponents(confirmButton, counteractButton);
+
+    this.confirmInteraction = await interaction.followUp({
+      embeds: [confirmEmbed],
+      components: [confirmRow],
+      isInteraction: true
+    });
+  }
+
+  // Handle's when the user accept the transfer
+  @ButtonComponent({ id: 'confirmButton' })
+  async HandleConfirm(interaction: ButtonInteraction) {
+    // Verify if the Payer exists on Database
+    let payerDb = await pClient.user.findUnique({
+      where: { id: this.payer.id }
     });
 
-    await interaction.editReply({
-      content: JSON.stringify({
-        uuid: receiver.uuid,
-        id: receiver.id,
-        money: receiver.money,
-        createdAt: receiver.createdAt
+    // If the payer don't exists
+    if (!payerDb) {
+      // Create it on the database
+      payerDb = await pClient.user.create({
+        data: { id: this.payer.id }
       })
+    }
+
+    // Verify if the Receiver exists on Database
+    let receiverDb = await pClient.user.findUnique({
+      where: { id: this.receiver.id }
+    });
+
+    // If the receiver don't exists
+    if (!receiverDb) {
+      // Create it on the database
+      receiverDb = await pClient.user.create({
+        data: { id: this.receiver.id }
+      })
+    }
+
+    console.log(Date.now())
+    // ***************
+    console.log(receiverDb)
+    console.log(payerDb)
+  }
+
+  // Handle's when the user declines the transfer
+  @ButtonComponent({ id: 'cancelButton' })
+  async HandleCounteract(interaction: ButtonInteraction) {
+    const cancelledEmbed = new EmbedBuilder()
+      .setColor('Red')
+      .setDescription(`<@${interaction.user.id}> cancelou a transferência...`);
+
+    this.waitingInteraction.edit({
+      components: [],
+      embeds: [cancelledEmbed]
+    });
+
+    const userCancelledEmbed = new EmbedBuilder()
+      .setColor('Red')
+      .setDescription('Você cancelou a transferência...');
+
+    this.confirmInteraction.edit({
+      components: [],
+      embeds: [userCancelledEmbed]
     });
   }
 }

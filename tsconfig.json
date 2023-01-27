@@ -29,7 +29,7 @@
       "$types/*": ["./src/types/*"],
       "$commands/*": ["./src/commands/*"],
       "$events/*": ["./src/events/*"],
-      "$db/*": ["./src/prisma/*"],
+      "$database/*": ["./src/database/*"],
       "$plugins/*": ["./src/plugins/*"],
       "$/*": ["./*"]
     },

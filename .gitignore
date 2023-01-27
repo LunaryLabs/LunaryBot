@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,linux,windows,visualstudiocode,typings
+# Created by https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings,replit
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,linux,windows,visualstudiocode,typings,replit
 
 ### Linux ###
 *~
@@ -156,6 +156,13 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+### replit ###
+# Replit config file
+.replit
+
+# Replit Nix config file
+replit.nix
+
 ### Typings ###
 ## Ignore downloaded typings
 typings
@@ -204,4 +211,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings
+# End of https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings,replit

@@ -10,7 +10,7 @@
     "dev": "tsx watch src/index.ts",
     "prod": "node dist/index.js",
     "build": "tsc -b",
-    "migrate": "prisma migrate dev --schema=./src/prisma/schema.prisma",
+    "migrate": "prisma migrate dev --schema=./src/database/schema.prisma",
     "prepare": "ts-patch install -s"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 import { ArgsOf, Client, Discord, Once } from 'discordx';
 
-import { pClient } from '$db/prisma.js';
 import { pino } from '$lib/Logger.js';
+import { AppSource } from '$database/DataSource.js';
 
 @Discord()
 export abstract class Ready {
@@ -57,7 +57,7 @@ export abstract class Ready {
     pino.warn('[!] Connecting to Database')
 
     // Init App Commands Guilds
-    await pClient.$connect()
+    await AppSource.initialize()
       .then(() => pino.info('[*] Connected to Database...'))
       .catch(() => pino.error('[!!] Error when connecting to Database'));
   }

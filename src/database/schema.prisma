@@ -12,6 +12,7 @@ generator client {
 }
 
 model User {
+
   uuid      String   @id @unique @default(uuid())
   createdAt DateTime @default(now())
 
@@ -19,5 +20,7 @@ model User {
   id String @unique
 
   // Economy
-  money Int @default(0)
+  money BigInt @default(0)
+
+  @@map("user")
 }
