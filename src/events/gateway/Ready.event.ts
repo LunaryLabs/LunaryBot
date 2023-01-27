@@ -1,7 +1,6 @@
 import { ArgsOf, Client, Discord, Once } from 'discordx';
 
-import { perfData } from '$lib/Common';
-import { performance } from 'node:perf_hooks';
+import { pClient } from '@db';
 import { pino } from '$lib/Logger';
 
 @Discord()
@@ -9,57 +8,57 @@ export abstract class Ready {
   @Once({ event: 'ready' })
   async Handle([_]: ArgsOf<'ready'>, client: Client) {
     // Make sure all guilds are cached
-    pino.warn('[!] Synchronizing guilds...');
-
-    try {
-      const syncGuildSuccess = '[*] Synchronized guilds...';
-
-      // Fetch Guilds
-      await client.guilds.fetch();
-
-      // Log success
-      pino.info(syncGuildSuccess);
-    } catch (err) {
-      const syncGuildFail = '[!!] Error when synchronizing guilds...';
-
-      // Log fail
-      pino.error(syncGuildFail);
-    }
+    this.syncGuilds(client);
 
     // Synchronize applications commands with Discord
-    pino.warn('[!] Synchronizing global commands...');
+    this.syncCommands(client);
 
-    try {
-      const syncCommandsSuccess = '[*] Synchronized global commands....';
+    // Clear Commands
+    // this.clearCommands(client);
 
-      // Init App Commands Guilds
-      await client.initApplicationCommands();
-
-      // Log success
-      pino.info(syncCommandsSuccess);
-    } catch (err) {
-      const syncCommandsFail = '[!!] Error when synchronizing global commands...';
-
-      // Log fail
-     pino.error(syncCommandsFail);
-    }
-
-    // To clear all guild commands, uncomment this line,
-    // This is useful when moving from guild commands to global commands
-    // It must only be executed once
-
-    //  await client.clearApplicationCommands(
-    //    ...client.guilds.cache.map((g) => g.id)
-    //  ),
+    // Connect to database
+    await this.databaseConnect();
 
     // When connected
-    const end = performance.now()
-    perfData.set('end', end)
-
-    const startTime = ~~perfData.get('start')!;
-    const endTime = ~~perfData.get('end')!;
-
     pino.info(`[*] Connected to the gateway as ${client.user?.tag}`);
-    pino.info(`[?] Boot time: ${Math.abs(startTime - endTime)}ms`)
+  }
+
+  // Sync Guilds
+  syncGuilds(client: Client) {
+    // WARN
+    pino.warn('[!] Synchronizing guilds...');
+
+    // Fetch Guilds
+    client.guilds.fetch()
+      .then(() => pino.info('[*] Synchronized guilds...'))
+      .catch(() => pino.error('[!!] Error when synchronizing guilds...'));
+  }
+
+  // Sync Commands
+  syncCommands(client: Client) {
+    // WARN
+    pino.warn('[!] Synchronizing global commands...');
+
+    // Init App Commands Guilds
+    client.initApplicationCommands()
+      .then(() => pino.info('[*] Synchronized global commands...'))
+      .catch(() => pino.error('[!!] Error when synchronizing global commands...'));
+  }
+
+  async clearCommands(client: Client) {
+    // Clear Application Commands
+    await client.clearApplicationCommands(
+      ...client.guilds.cache.map((g) => g.id)
+    );
+  }
+
+  async databaseConnect() {
+    // WARN
+    pino.warn('[!] Connecting to Database')
+
+    // Init App Commands Guilds
+    await pClient.$connect()
+      .then(() => pino.info('[*] Connected to Database...'))
+      .catch(() => pino.error('[!!] Error when connecting to Database'));
   }
 }

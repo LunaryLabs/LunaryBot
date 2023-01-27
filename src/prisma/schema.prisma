@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+model User {
+  uuid      String   @id @unique @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Discord
+  id String @unique
+
+  // Economy
+  money Int @default(0)
+}
