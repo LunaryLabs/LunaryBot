@@ -1,5 +1,5 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
-import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, GuildMemberRoleManager } from 'discord.js';
+import { Client, Discord, Slash, SlashOption } from 'discordx';
 
 @Discord()
 export abstract class Ban {

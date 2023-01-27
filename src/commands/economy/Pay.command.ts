@@ -1,7 +1,6 @@
-import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
-
-import { pClient } from "@db";
+import { pClient } from "$db/prisma.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember } from "discord.js";
+import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
 @Discord()
 @SlashGroup("economy")

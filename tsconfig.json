@@ -12,6 +12,7 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "declaration": true,
+    "importHelpers": true,
     "moduleResolution": "Node",
     "moduleDetection": "auto",
     "skipLibCheck": true,
@@ -22,16 +23,24 @@
     "removeComments": true,
     "paths": {
       // Direct Paths
-      "@db": ["./src/prisma"],
 
       // Aliases Paths
       "$lib/*": ["./src/lib/*"],
       "$types/*": ["./src/types/*"],
       "$commands/*": ["./src/commands/*"],
       "$events/*": ["./src/events/*"],
+      "$db/*": ["./src/prisma/*"],
       "$plugins/*": ["./src/plugins/*"],
       "$/*": ["./*"]
     },
+
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
   },
 
   "buildOptions": {

@@ -1,4 +1,4 @@
-import { IResponse } from "$lib/commands/anime/IResponse";
+import type { IResponse } from "$lib/commands/anime/IResponse.js";
 
 export const getAnime = async (animeName: string) => {
   // Faz a requisição à API externa

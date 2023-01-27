@@ -1,7 +1,6 @@
-import { AnimeType, getAnime } from '$plugins/Anime.plugin'
-
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, ButtonInteraction, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
-import { Discord, Slash, SlashOption, ButtonComponent } from "discordx";
+import { AnimeType, getAnime } from '$plugins/Anime.plugin.js';
+import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { ButtonComponent, Discord, Slash, SlashOption } from "discordx";
 
 
 @Discord()

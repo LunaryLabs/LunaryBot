@@ -1,7 +1,7 @@
 import { ArgsOf, Client, Discord, Once } from 'discordx';
 
-import { pClient } from '@db';
-import { pino } from '$lib/Logger';
+import { pClient } from '$db/prisma.js';
+import { pino } from '$lib/Logger.js';
 
 @Discord()
 export abstract class Ready {

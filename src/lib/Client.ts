@@ -1,8 +1,8 @@
-import { LunaryActivityType, LunaryIntentsBits, LunaryPartials } from '$types/Lunary';
+import { LunaryActivityType, LunaryIntentsBits, LunaryPartials } from '$types/Lunary.js';
 
-import { Client } from 'discordx';
+import { pino } from '$lib/Logger.js';
 import { GatewayIntentBits } from 'discord.js';
-import { pino } from '$lib/Logger';
+import { Client } from 'discordx';
 
 export class Lunary {
   protected token!: string;

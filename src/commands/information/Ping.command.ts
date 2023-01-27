@@ -1,6 +1,5 @@
-import { Discord, Slash } from 'discordx';
-
 import { ChatInputCommandInteraction } from 'discord.js';
+import { Discord, Slash } from 'discordx';
 
 @Discord()
 export abstract class Ping {

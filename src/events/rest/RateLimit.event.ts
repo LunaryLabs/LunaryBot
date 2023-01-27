@@ -1,6 +1,6 @@
 import { Discord, On, RestArgsOf } from "discordx";
 
-import { pino } from "$lib/Logger";
+import { pino } from "$lib/Logger.js";
 
 @Discord()
 export abstract class RateLimit {

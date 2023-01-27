@@ -1,5 +1,6 @@
-import { Lunary } from '$lib/Client';
 import { dirname, importx } from '@discordx/importer';
+
+import { Lunary } from '$lib/Client.js';
 import { config } from 'dotenv';
 import { join } from 'node:path';
 
