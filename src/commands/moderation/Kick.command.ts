@@ -1,26 +1,27 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, GuildMemberRoleManager } from 'discord.js';
+import { pino } from '$lib/Logger';
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashOption } from 'discordx';
 
 @Discord()
 export abstract class Ban {
   @Slash({
-    name: 'kick',
-    description: 'kick command with coisas aleatórias',
+    name: 'expulsar',
+    description: 'Moderação » Expulse usuários',
     defaultMemberPermissions: ['KickMembers'],
     dmPermission: false
   })
   async Handler(
     @SlashOption({
-      name: 'user',
-      description: 'user with kick',
+      name: 'usuário',
+      description: 'R ‣ O usuário a expulsar',
       type: ApplicationCommandOptionType.User,
       required: true
     })
     user: GuildMember,
 
     @SlashOption({
-      name: 'reason',
-      description: 'reason kick',
+      name: 'motivo',
+      description: 'O ‣ O motivo para expulsar',
       type: ApplicationCommandOptionType.String,
       required: false
     })
@@ -29,51 +30,97 @@ export abstract class Ban {
     interaction: ChatInputCommandInteraction,
     client: Client
   ) {
-    await interaction.deferReply();
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
-    const roles = interaction.member?.roles as GuildMemberRoleManager;
-    // const permissions = interaction.member?.permissions as PermissionsBitField;
+    // Verify thing's
+    if (!interaction.member) throw new ReferenceError('Member don\'t exist!');
+    if (!interaction.guild) throw new ReferenceError('I don\'t in a guild!');
+    if (!interaction.guild.members.me) throw new ReferenceError('I don\'t a member in a guild!');
+    if (!client.user) throw new ReferenceError('Client don\'t exist!');
+
+    // Get role from the User
+    const roles = interaction.member.roles as GuildMemberRoleManager;
+    const targetRoles = user.roles as GuildMemberRoleManager;
 
     // If the user tries to ban an user above
-    if (user.roles?.highest?.rawPosition > roles?.highest?.rawPosition) {
-      await interaction.editReply({ content: "vai tomar no teu cu" });
+    if (targetRoles.highest.position > roles.highest.position) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de expulsar pessoas acima de você!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
     // If the user tries to ban the bot
-    if (user.id === client.user?.id) {
-      await interaction.editReply({ content: "ta tentando me expulsar porra" });
+    if (user.id === client.user.id) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de expulsar o bot!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
     // If the user tries to ban himself
     if (user.id === interaction.user.id) {
-      await interaction.editReply({ content: "Você não pode se expulsar karalho" });
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de expulsar-se!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
-    // If the bot don't have the 'BanMembers' permission
-    if (!interaction.guild?.members.me?.permissions.has('KickMembers')) {
-      await interaction.editReply({ content: "Eu não tenho permissão para expulsar ninguem!" });
+    // If the bot don't have the 'KickMembers' permission
+    if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Eu não tenho a permissão de expulsar membros (KickMembers)!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
-
-    // If the user bot don't have the 'BanMembers' permission
-    // if (!permissions.has('BanMembers')) {
-    //   await interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões." });
-    //   return;
-    // }
-
 
     try {
-      // Ban the user
-      await user.kick(reason)
+      // Kick's the User from the Guild
+      await user.kick(reason);
 
       // And tell's the user
-      await interaction.editReply({ content: "usuário expulso com sucesso!" });
+      const successEmbed = new EmbedBuilder()
+        .setTitle('Sucesso!')
+        .setDescription('Usuário expulso com sucesso!')
+        .setColor('Green');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [successEmbed] });
+      return;
     } catch (err) {
-      await interaction.editReply({ content: "Não foi possivel expulsar este usuário" });
+      // Log's the error on console
+      pino.error(err);
+
+      // And tell's the user
+      const failEmbed = new EmbedBuilder()
+        .setTitle('Sem sucesso!')
+        .setDescription('Não foi possível expulsar esse usuário!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [failEmbed] });
+      return;
     }
   }
-
-};
+}

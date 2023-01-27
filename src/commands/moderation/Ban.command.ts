@@ -1,93 +1,143 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, GuildMemberRoleManager } from 'discord.js';
+import { pino } from '$lib/Logger';
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
 @Discord()
 export abstract class Ban {
   @Slash({
-    name: 'ban',
-    description: 'ban command with coisas aleatórias',
+    name: 'banir',
+    description: 'Moderação » Bane usuários',
     defaultMemberPermissions: ['BanMembers'],
     dmPermission: false
   })
   async Handler(
     @SlashOption({
-      name: 'user',
-      description: 'user with ban',
+      name: 'usuário',
+      description: 'R ‣ O usuário a banir',
       type: ApplicationCommandOptionType.User,
       required: true
     })
     user: GuildMember,
 
     @SlashOption({
-      name: 'reason',
-      description: 'reason ban',
+      name: 'motivo',
+      description: 'R ‣ O motivo para banir',
       type: ApplicationCommandOptionType.String,
       required: true
     })
     reason: string,
 
-    @SlashChoice({ name: "7-days", value: "7-days" })
-    @SlashChoice({ name: "14-days", value: "14-days" })
+    @SlashChoice({ name: 'Deletar mensagens de até 7d atrás', value: 7 })
+    @SlashChoice({ name: 'Deletar mensagens de até 6d atrás', value: 6 })
+    @SlashChoice({ name: 'Deletar mensagens de até 5d atrás', value: 5 })
+    @SlashChoice({ name: 'Deletar mensagens de até 4d atrás', value: 4 })
+    @SlashChoice({ name: 'Deletar mensagens de até 3d atrás', value: 3 })
+    @SlashChoice({ name: 'Deletar mensagens de até 2d atrás', value: 2 })
+    @SlashChoice({ name: 'Deletar mensagens de até 1d atrás', value: 1 })
+    @SlashChoice({ name: 'Deletar todas as mensagens', value: 0 })
     @SlashOption({
-      name: 'delete-messages',
-      description: 'delete messages time',
-      type: ApplicationCommandOptionType.String,
-      required: false
+      name: 'deletar-mensagens',
+      description: 'O ‣ Excluir mensagens, a quantos dias?',
+      type: ApplicationCommandOptionType.Number,
+      required: false,
+
+      minValue: 0,
+      maxValue: 7
     })
-    days: string,
+    days: number,
 
     interaction: ChatInputCommandInteraction,
     client: Client
   ) {
-    await interaction.deferReply();
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
-    const roles = interaction.member?.roles as GuildMemberRoleManager;
-    // const permissions = interaction.member?.permissions as PermissionsBitField;
+    // Verify thing's
+    if (!interaction.member) throw new ReferenceError('Member don\'t exist!');
+    if (!interaction.guild) throw new ReferenceError('I don\'t in a guild!');
+    if (!interaction.guild.members.me) throw new ReferenceError('I don\'t a member in a guild!');
+    if (!client.user) throw new ReferenceError('Client don\'t exist!');
 
-    const dias: Record<string, number> = {
-      "7-days": 7,
-      "14-days": 14
-    }
+    const roles = interaction.member.roles as GuildMemberRoleManager;
+    const targetRoles = user.roles as GuildMemberRoleManager;
 
     // If the user tries to ban an user above
-    if (user.roles.highest.rawPosition > roles.highest.rawPosition) {
-      await interaction.editReply({ content: "vai tomar no teu cu" });
+    if (targetRoles.highest.position > roles.highest.position) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de banir pessoas acima de você!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
     // If the user tries to ban the bot
-    if (user.id === client.user?.id) {
-      await interaction.editReply({ content: "ta tentando me banir porra" });
+    if (user.id === client.user.id) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de banir o bot!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
     // If the user tries to ban himself
     if (user.id === interaction.user.id) {
-      await interaction.editReply({ content: "Você não pode se banir karalho" });
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Você não é permitido de banir-se!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
 
-    // If the bot don't have the 'BanMembers' permission
-    if (!interaction.guild?.members.me?.permissions.has('BanMembers')) {
-      await interaction.editReply({ content: "Eu não tenho permissão para banir ninguem!" });
+    if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) {
+      // Unauthorized Embed
+      const unauthorizedEmbed = new EmbedBuilder()
+        .setTitle('Não permitido!')
+        .setDescription('Eu não tenho a permissão de banir membros (BanMembers)!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [unauthorizedEmbed] });
       return;
     }
-
-    // If the user bot don't have the 'BanMembers' permission
-    // if (!permissions.has('BanMembers')) {
-    //   await interaction.editReply({ content: "Você não tem permissao fdp, vai tomar no teu cu e arruma essa porra de permissões." });
-    //   return;
-    // }
-
 
     try {
-      // Ban the user
-      await user.ban({ reason: reason, deleteMessageSeconds: dias[days] });
+      // Kick's the User from the Guild
+      await user.ban({ reason: reason, deleteMessageSeconds: days });
 
       // And tell's the user
-      await interaction.editReply({ content: "usuário banido com sucesso!" });
+      const successEmbed = new EmbedBuilder()
+        .setTitle('Sucesso!')
+        .setDescription('Usuário banido com sucesso!')
+        .setColor('Green');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [successEmbed] });
+      return;
     } catch (err) {
-      await interaction.editReply({ content: "Não foi possivel banir este usuário" });
+      // Log's the error on console
+      pino.error(err);
+
+      // And tell's the user
+      const failEmbed = new EmbedBuilder()
+        .setTitle('Sem sucesso!')
+        .setDescription('Não foi possível banir esse usuário!')
+        .setColor('Red');
+
+      // Reply's to the user
+      await interaction.editReply({ embeds: [failEmbed] });
+      return;
     }
   }
 
