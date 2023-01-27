@@ -1,26 +1,21 @@
 import { ArgsOf, Client, Discord, On } from "discordx";
 
 import { pino } from "$lib/Logger";
-import { wait } from "$lib/Common";
 
 @Discord()
 export abstract class MessageReactionAdd {
   @On({ event: 'messageReactionAdd' })
   async Handle([reaction, user]: ArgsOf<'messageReactionAdd'>, client: Client) {
     try {
-      // Execute interaction
-      await client.executeReaction(reaction, user);
+      // Execute reaction
+      client.executeReaction(reaction, user)
     } catch (err) {
-      const failReaction = 'Falha ao executar essa reação...';
+      // Reply's to the user, and remove the Reaction
+      reaction.message.reply('Falha ao executar essa reação...');
+      reaction.remove();
 
-      // And Reply to the User!
-      const msg = await reaction.message.reply(failReaction);
-
-      // Log Error
+      // Log's the Error
       pino.error(err);
-
-      await wait(5000);
-      if (msg.deletable) msg.delete();
     }
   }
 }

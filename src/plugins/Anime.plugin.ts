@@ -1,22 +1,28 @@
-export async function getAnime(animeName: string) {
+import { IResponse } from "$lib/commands/anime/IResponse";
 
-        // Faz a requisição à API externa
-        const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeName}`)
-        const anime = await response.json()
+export const getAnime = async (animeName: string) => {
+  // Faz a requisição à API externa
+  const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeName}`)
+  const anime: IResponse = await response.json()
+  const { attributes } = anime.data[0];
 
+  const formattedAnime = {
+    title: attributes.titles.en ? attributes.titles.en_jp : animeName,
+    synopsis: attributes?.synopsis,
+    rating: attributes?.averageRating,
+    image: attributes?.coverImage?.large,
+    eps: attributes?.episodeCount,
+    nsfw: attributes?.nsfw
+  }
 
-        const { attributes } = anime.data[0];
+  return formattedAnime
+}
 
-        const formattedAnime = {
-          title: attributes?.titles?.en ? attributes?.titles?.en_jp : animeName,
-          synopsis: attributes?.synopsis,
-          rating: attributes?.averageRating,
-          image: attributes?.coverImage?.large,
-          eps: attributes?.episodeCount,
-          nsfw: attributes?.nsfw
-        }
-
-
-
-        return formattedAnime
+export interface AnimeType {
+  title: string;
+  synopsis: string;
+  rating: string;
+  image: string;
+  eps: number;
+  nsfw: boolean;
 }

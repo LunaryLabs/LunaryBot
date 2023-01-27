@@ -1,13 +1,14 @@
-import { getAnime } from '$plugins/Anime.plugin'
+import { AnimeType, getAnime } from '$plugins/Anime.plugin'
 
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, ButtonInteraction, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
 import { Discord, Slash, SlashOption, ButtonComponent } from "discordx";
 
 
-let res: void | { title: any; synopsis: any; rating: any; image: any; eps: any; nsfw: any; };
-let id:string
 @Discord()
-export abstract class AnimeCommand {
+export abstract class Anime {
+  res: AnimeType;
+  id: string;
+
   @Slash({
     name: 'anime',
     description: 'Pesquise animes!',
@@ -24,47 +25,52 @@ export abstract class AnimeCommand {
 
     interaction: ChatInputCommandInteraction,
   ) {
-    id = interaction.user.id
     await interaction.deferReply();
-    let response = await getAnime(anime).catch(err => { console.log(err)})
-    res = response
-    if(!response) return interaction.editReply({ content: "Não encontrei nenhum anime com esse titulo!"})
 
-    let embed = new EmbedBuilder()
-        .setTitle(response?.title + ` [${response?.rating}]`)
-        .setDescription(response?.synopsis)
-        .setColor('#635bff')
-        .setImage(response?.image)
-
-    let button = new ButtonBuilder()
-        .setCustomId('anime-view')
-        .setStyle(ButtonStyle.Primary)
-        .setLabel('Accept')
-        .setEmoji('✅')
-
-    let row = new ActionRowBuilder<ButtonBuilder>()
-        .addComponents(button)
+    // Set Response and ID
+    this.res = await getAnime(anime);
+    this.id = interaction.user.id
 
 
-    let embed_nsfw = new EmbedBuilder()
-        .setTitle(`Nsfw Content`)
-        .setDescription('Animes searched here may possibly have nsfw content, do you claim to be over 18?')
-        .setColor('#fc1605')
+    if (!this.res) {
+      await interaction.editReply({ content: "Não encontrei nenhum anime com esse titulo!" });
+      return;
+    }
+
+    const button = new ButtonBuilder()
+      .setCustomId('anime-view')
+      .setStyle(ButtonStyle.Primary)
+      .setLabel('Accept')
+      .setEmoji('✅')
+
+    const row = new ActionRowBuilder<ButtonBuilder>()
+      .addComponents(button)
 
 
-    interaction.editReply({ embeds: [embed_nsfw], components: [row]})
+    const embed_nsfw = new EmbedBuilder()
+      .setTitle(`Nsfw Content`)
+      .setDescription('Animes searched here may possibly have nsfw content, do you claim to be over 18?')
+      .setColor('#fc1605')
+
+
+    await interaction.editReply({ embeds: [embed_nsfw], components: [row] })
   }
 
   @ButtonComponent({ id: "anime-view" })
-  handler(interaction: ButtonInteraction): void {
+  async HandleButton(interaction: ButtonInteraction) {
 
-    let embed = new EmbedBuilder()
-        .setTitle(res?.title + ` [${res?.rating}]`)
-        .setDescription(res?.synopsis)
-        .setColor('#635bff')
-        .setImage(res?.image)
-    if(interaction.user.id !== id) interaction.reply({ content: "You are't allowed use this button", ephemeral: true})
-    else interaction.update({ embeds: [embed], components: []})
+    const embed = new EmbedBuilder()
+      .setTitle(this.res.title + ` [${this.res.rating}]`)
+      .setDescription(this.res.synopsis)
+      .setColor('#635bff')
+      .setImage(this.res.image)
+
+    if (interaction.user.id !== this.id) {
+      await interaction.reply({ content: "You are't allowed use this button", ephemeral: true })
+      return;
+    }
+
+    await interaction.update({ embeds: [embed], components: [] })
   }
 
 }

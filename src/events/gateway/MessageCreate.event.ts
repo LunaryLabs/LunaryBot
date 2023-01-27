@@ -6,17 +6,13 @@ import { pino } from "$lib/Logger";
 export abstract class MessageCreate {
   @On({ event: 'messageCreate' })
   async Handle([msg]: ArgsOf<'messageCreate'>, client: Client) {
-    await client.executeCommand(msg)
     try {
-      // Execute interaction
-      await client.executeCommand(msg)
-  } catch (err) {
-      const failInteraction = 'Falha ao executar essa interação...';
+      client.executeCommand(msg)
+    } catch(err) {
+      // Reply's to the user
+      msg.reply('Falha ao executar essa interação...');
 
-      // And Reply to the User!
-      await msg.reply(failInteraction);
-
-      // Log Error
+      // Log's the Error
       pino.error(err);
     }
   }
