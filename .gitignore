@@ -211,4 +211,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings,replit
+### replit ### # Replit config file .replit # Replit Nix config file replit.nix
+
+# End of https://www.toptal.com/developers/gitignore/api/node,linux,windows,visualstudiocode,typings
