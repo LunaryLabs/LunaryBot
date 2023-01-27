@@ -1,9 +1,13 @@
 # Lunary Labs
 
-![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
-![Total Lines](https://img.shields.io/tokei/lines/github/LunaryLabs/LunaryBot?color=%23635bff&logo=github&style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/LunaryLabs?color=635bff&logo=github&style=for-the-badge)
+![Total Lines](https://img.shields.io/tokei/lines/github/LunaryLabs/LunaryBot?color=635bff&logo=github&style=for-the-badge)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/LunaryLabs/LunaryBot?color=635bff&logo=snyk&style=for-the-badge)
+![Discord](https://img.shields.io/discord/1067454972876300400?color=635bff&logo=discord&style=for-the-badge)
+![License](https://img.shields.io/github/license/LunaryLabs/LunaryBot?color=635bff&logo=apache&style=for-the-badge)
 
 <img src="https://media.discordapp.net/attachments/1067468183918891058/1067790316855369798/image.png" alt="lunary-bot">
 
