@@ -1,0 +1,55 @@
+name: 🔁 CI
+
+on:
+  push:
+    branches: ["canary"]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 📦 Build
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        node: [lts/*]
+        pnpm: [latest]
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+
+    steps:
+      # Checkout
+      - name: 📀 Git Checkout
+        uses: actions/checkout@v3
+
+      # Configure GIT
+      - name: ⚙️ Configure Git User
+        run: |
+          git config --global user.email "no-reply@github.com"
+          git config --local user.name "GitHub Actions"
+
+      - name: ⬇️ Install pNPM
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: ${{ matrix.pnpm }}
+
+      # Setup Node
+      - name: 🔁 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      # Pnpm Install
+      - name: ⬇️ pNPM Install
+        run: pnpm install --frozen-lockfile
+
+      # Lint Project
+      - name: 📦 pNPM Build
+        run: pnpm run build
