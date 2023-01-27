@@ -94,6 +94,14 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
         </sub>
       </a>
     </td>
+     <td align="center">
+      <a href="#">
+        <img  src="https://cdn.discordapp.com/avatars/465859183250767882/8e6ca9d7af1c01cabfbb5ba6dc454fce.png?size=2048" width="100px;" alt="photo"/><br>
+        <sub>
+          <b>bueno.#4181</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
 
