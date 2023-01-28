@@ -1,5 +1,6 @@
 .vscode/*
 pnpm-lock.json
+yarn.lock
 package.json
 LICENSE.md
 README.md

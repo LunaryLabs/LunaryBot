@@ -3,51 +3,34 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "declarationDir": "dist",
-    "outDir": "dist",
-    "rootDir": "src/",
+    "outDir": "./dist/",
+    "rootDir": "./src/",
     "baseUrl": ".",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "declaration": true,
-    "importHelpers": true,
     "moduleResolution": "Node",
-    "moduleDetection": "auto",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "composite": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "paths": {
-      // Direct Paths
+      "$lib/*": ["src/lib/*"],
+      "$plugins/*": ["src/lib/plugins/*"],
+      "$helpers/*": ["src/lib/helpers/*"],
+      "$controllers/*": ["src/lib/controllers/*"],
+      "$structures/*": ["src/lib/structures/*"],
 
-      // Aliases Paths
-      "$lib/*": ["./src/lib/*"],
-      "$types/*": ["./src/types/*"],
-      "$commands/*": ["./src/commands/*"],
-      "$events/*": ["./src/events/*"],
-      "$database/*": ["./src/database/*"],
-      "$plugins/*": ["./src/plugins/*"],
-      "$/*": ["./*"]
+      "$types/*": ["src/types/*"],
+      "$commands/*": ["src/commands/*"],
+      "$events/*": ["src/events/*"],
+      "$database/*": ["src/database/*"],
+
+      "$/*": ["*"]
     },
-
-    "plugins": [
-      // Transform paths in output .js files
-      { "transform": "typescript-transform-paths" },
-
-      // Transform paths in output .d.ts files (Include this line if you output declarations files)
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ],
-  },
-
-  "buildOptions": {
-    "verbose": true,
-    "incremental": true,
-    "traceResolution": true,
   },
   "exclude": ["node_modules/", "dist"],
-  "include": ["src/", "prisma/"]
+  "include": ["src/"]
 }

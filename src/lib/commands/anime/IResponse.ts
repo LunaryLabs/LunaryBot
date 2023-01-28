@@ -1,4 +1,3 @@
-
 export interface IResponse {
   data: Array<IKitsuAnimeResponse>;
 }
@@ -498,34 +497,34 @@ export interface IKitsuAnimeResponse {
 }
 
 const enum AgeRating {
-  "G",
-  "PG",
-  "R",
-  "R18"
+  'G',
+  'PG',
+  'R',
+  'R18'
 }
 
 const enum SubType {
-  "ONA",
-  "OVA",
-  "TV",
-  "movie",
-  "music",
-  "special"
+  'ONA',
+  'OVA',
+  'TV',
+  'movie',
+  'music',
+  'special'
 }
 
 const enum ShowType {
-  "ONA",
-  "OVA",
-  "TV",
-  "movie",
-  "music",
-  "special"
+  'ONA',
+  'OVA',
+  'TV',
+  'movie',
+  'music',
+  'special'
 }
 
 const enum Status {
-  "current",
-  "finished",
-  "tba",
-  "unreleased",
-  "upcoming"
+  'current',
+  'finished',
+  'tba',
+  'unreleased',
+  'upcoming'
 }

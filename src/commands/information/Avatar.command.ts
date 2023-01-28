@@ -4,7 +4,7 @@ import { ContextMenu, Discord } from 'discordx';
 @Discord()
 export abstract class Avatar {
   @ContextMenu({
-    name: "View Avatar",
+    name: 'View Avatar',
     dmPermission: true,
     type: ApplicationCommandType.User
   })

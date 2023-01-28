@@ -4,7 +4,7 @@ import { ContextMenu, Discord } from 'discordx';
 @Discord()
 export abstract class Info {
   @ContextMenu({
-    name: "View Info",
+    name: 'View Info',
     dmPermission: true,
     type: ApplicationCommandType.User,
   })
@@ -16,12 +16,12 @@ export abstract class Info {
       .setColor('#635bff')
       .setThumbnail(`https://cdn.discordapp.com/avatars/${interaction.targetUser.id}/${interaction.targetUser?.avatar}.jpg?size=4096`)
       .addFields({
-        name: "User ID",
+        name: 'User ID',
         value: interaction.targetUser.id
       })
       .addFields({
-        name: "User Bot",
-        value: `${interaction.targetUser.bot ? "`Yes`" : "`No`"}`
+        name: 'User Bot',
+        value: `${interaction.targetUser.bot ? '`Yes`' : '`No`'}`
       })
 
     await interaction.editReply({ embeds: [infoEmbed] })

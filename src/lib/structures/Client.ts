@@ -2,26 +2,33 @@ import { LunaryActivityType, LunaryIntentsBits, LunaryPartials } from '$types/Lu
 
 import { Client } from 'discordx';
 import { GatewayIntentBits } from 'discord.js';
-import { pino } from '$lib/Logger.js';
+import { pino } from '$structures/Logger.js';
 
 export class Lunary {
-  protected token!: string;
+  protected token: string;
   protected intents!: Array<GatewayIntentBits>;
   public client: Client;
 
   constructor() {
-    switch (process.env["NODE_ENV"]) {
-      case 'production':
-        pino.info('[*] Loading in production mode')
-        this.token = process.env["TOKEN_MAIN"]!
-        this.intents = LunaryIntentsBits.main;
-        break;
+    // Verify if the user is using production or development
+    if (process.env['NODE_ENV'] == 'production') {
+      // Log in the console
+      pino.warn('‼ Loading in production mode');
 
-      case 'development':
-        pino.info('[*] Loading in development mode')
-        this.token = process.env["TOKEN_CANARY"]!
-        this.intents = LunaryIntentsBits.canary;
-        break;
+      // Set Token
+      this.token = process.env['TOKEN_MAIN']!;
+
+      // Set Intents
+      this.intents = LunaryIntentsBits.main;
+    } else {
+      // Log in the console
+      pino.warn('‼ Loading in development mode');
+
+      // Set Token
+      this.token = process.env['TOKEN_CANARY']!;
+
+      // Set Intents
+      this.intents = LunaryIntentsBits.canary;
     }
 
     this.client = new Client({

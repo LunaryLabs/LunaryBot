@@ -1,12 +1,12 @@
-import { pino } from '$lib/Logger';
+import { pino } from '$structures/Logger.js';
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashOption } from 'discordx';
 
 @Discord()
-export abstract class Ban {
+export abstract class Kick {
   @Slash({
     name: 'expulsar',
-    description: 'Moderação » Expulse usuários',
+    description: 'Moderação Expulse usuários',
     defaultMemberPermissions: ['KickMembers'],
     dmPermission: false
   })
@@ -110,7 +110,7 @@ export abstract class Ban {
       return;
     } catch (err) {
       // Log's the error on console
-      pino.error(err);
+      pino.error('✕', err);
 
       // And tell's the user
       const failEmbed = new EmbedBuilder()
