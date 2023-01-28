@@ -1,4 +1,4 @@
-import { pino } from '$lib/Logger';
+import { pino } from '$structures/Logger.js';
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
@@ -6,7 +6,7 @@ import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 export abstract class Ban {
   @Slash({
     name: 'banir',
-    description: 'Moderação » Bane usuários',
+    description: 'Moderação Bane usuários',
     defaultMemberPermissions: ['BanMembers'],
     dmPermission: false
   })
@@ -27,14 +27,14 @@ export abstract class Ban {
     })
     reason: string,
 
-    @SlashChoice({ name: 'Deletar mensagens de até 7d atrás', value: 7 })
-    @SlashChoice({ name: 'Deletar mensagens de até 6d atrás', value: 6 })
-    @SlashChoice({ name: 'Deletar mensagens de até 5d atrás', value: 5 })
-    @SlashChoice({ name: 'Deletar mensagens de até 4d atrás', value: 4 })
-    @SlashChoice({ name: 'Deletar mensagens de até 3d atrás', value: 3 })
-    @SlashChoice({ name: 'Deletar mensagens de até 2d atrás', value: 2 })
-    @SlashChoice({ name: 'Deletar mensagens de até 1d atrás', value: 1 })
-    @SlashChoice({ name: 'Deletar todas as mensagens', value: 0 })
+    @SlashChoice({ name: 'Deletar mensagens de até 7d atrás', value: 604800 })
+    @SlashChoice({ name: 'Deletar mensagens de até 6d atrás', value: 518400 })
+    @SlashChoice({ name: 'Deletar mensagens de até 5d atrás', value: 432000 })
+    @SlashChoice({ name: 'Deletar mensagens de até 4d atrás', value: 345600 })
+    @SlashChoice({ name: 'Deletar mensagens de até 3d atrás', value: 259200 })
+    @SlashChoice({ name: 'Deletar mensagens de até 2d atrás', value: 172800 })
+    @SlashChoice({ name: 'Deletar mensagens de até 1d atrás', value: 86400 })
+    @SlashChoice({ name: 'Deletar nenhuma mensagem', value: 0 })
     @SlashOption({
       name: 'deletar-mensagens',
       description: 'O ‣ Excluir mensagens, a quantos dias?',
@@ -127,7 +127,7 @@ export abstract class Ban {
       return;
     } catch (err) {
       // Log's the error on console
-      pino.error(err);
+      pino.error('✕', err);
 
       // And tell's the user
       const failEmbed = new EmbedBuilder()

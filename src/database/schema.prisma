@@ -12,7 +12,6 @@ generator client {
 }
 
 model User {
-
   uuid      String   @id @unique @default(uuid())
   createdAt DateTime @default(now())
 

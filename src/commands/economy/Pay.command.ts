@@ -1,9 +1,9 @@
-import { pClient } from "$database/prisma.js";
-import { ActionRowBuilder, APIInteractionGuildMember, ApplicationCommandOptionType, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberEditData, Message } from "discord.js";
-import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "discordx";
+import { pClient } from '$database/Prisma.js';
+import { ActionRowBuilder, APIInteractionGuildMember, ApplicationCommandOptionType, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Message } from 'discord.js';
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from 'discordx';
 
 @Discord()
-@SlashGroup("economy")
+@SlashGroup('economy')
 export abstract class Pay {
   quantity: number;
 
@@ -64,7 +64,7 @@ export abstract class Pay {
     }).format(this.quantity)
 
     const confirmEmbed = new EmbedBuilder()
-      .setTitle("Confirmação")
+      .setTitle('Confirmação')
       .setDescription(`Você confirma mandar ${formattedQuantity} para <@${this.receiver.id}>`)
       .setColor('Red');
 

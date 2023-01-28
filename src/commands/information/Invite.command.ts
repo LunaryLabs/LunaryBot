@@ -17,19 +17,19 @@ export abstract class Invite {
       .setColor('#7ABBFF');
 
     const inviteButton = new ButtonBuilder()
-      .setLabel("Invite")
+      .setLabel('Invite')
       .setStyle(ButtonStyle.Link)
       .setURL(`https://discord.com/api/oauth2/authorize?client_id=1067487736447127593&permissions=8&scope=bot%20applications.commands`);
 
     const githubButton = new ButtonBuilder()
-      .setLabel("Github")
+      .setLabel('Github')
       .setStyle(ButtonStyle.Link)
-      .setURL("https://github.com/LunaryLabs/lunary-bot");
+      .setURL('https://github.com/LunaryLabs/lunary-bot');
 
     const supportButton = new ButtonBuilder()
-      .setLabel("Support")
+      .setLabel('Support')
       .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/HcWgHF3Mqv");
+      .setURL('https://discord.gg/HcWgHF3Mqv');
 
     const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
       inviteButton,

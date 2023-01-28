@@ -1,6 +1,6 @@
 import { ArgsOf, Client, Discord, On } from 'discordx';
 
-import { pino } from '$lib/Logger.js';
+import { pino } from '$structures/Logger.js';
 
 @Discord()
 export abstract class InteractionCreate {
@@ -10,14 +10,12 @@ export abstract class InteractionCreate {
       // Execute interaction
       client.executeInteraction(i)
     } catch (err) {
-      // And Reply to the User!
       if (i.isRepliable()) switch (i.deferred || i.replied) {
         case true: { i.editReply('Falha ao executar essa interação...') };
         case false: { i.reply('Falha ao executar essa interação...') };
       };
 
-      // Log Error
-      pino.error(err);
+      pino.error('✕', err);
     }
   }
 }

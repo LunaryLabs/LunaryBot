@@ -1,5 +1,5 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction } from 'discord.js';
+import { Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
 @Discord()
 export abstract class Jokenpo {
@@ -24,7 +24,7 @@ export abstract class Jokenpo {
   ) {
     await interaction.deferReply();
 
-    const botChoices = ["rock", "paper", "scissors"];
+    const botChoices = ['rock', 'paper', 'scissors'];
     const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
 
     // 0 = Tie
