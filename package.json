@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "type": "module",
   "main": "dist/index.js",
-  "packageManager": "pnpm@7.26.1",
+  "packageManager": "pnpm@7.26.2",
   "license": "MIT",
   "scripts": {
     "start": "tsx src/index.ts",
@@ -16,6 +16,8 @@
   "dependencies": {
     "@discordx/importer": "^1.1.10",
     "@prisma/client": "^4.9.0",
+    "@sentry/node": "^7.34.0",
+    "@sentry/tracing": "^7.34.0",
     "bufferutil": "^4.0.7",
     "discord.js": "^14.7.1",
     "discordx": "^11.6.0",

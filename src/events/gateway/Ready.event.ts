@@ -2,6 +2,7 @@ import { ArgsOf, Client, Discord, Once } from 'discordx';
 
 import { pClient } from '$database/Prisma.js';
 import { pino } from '$structures/Logger.js';
+import { sentry } from '$structures/Sentry.js';
 
 @Discord()
 export abstract class Ready {
@@ -31,7 +32,10 @@ export abstract class Ready {
     // Fetch Guilds
     client.guilds.fetch()
       .then(() => pino.info('✓ Synchronized guilds...'))
-      .catch(() => pino.error('✕ Error when synchronizing guilds...'));
+      .catch((err) => {
+        pino.error('✕ Error when synchronizing guilds...', err);
+        sentry.captureException(err);
+      });
   }
 
   // Sync Commands
@@ -42,7 +46,10 @@ export abstract class Ready {
     // Init App Commands Guilds
     client.initApplicationCommands()
       .then(() => pino.info('✓ Synchronized global commands...'))
-      .catch(() => pino.error('✕ Error when synchronizing global commands...'));
+      .catch((err) => {
+        pino.error('✕ Error when synchronizing global commands...', err);
+        sentry.captureException(err);
+      });
   }
 
   async clearCommands(client: Client) {
@@ -57,6 +64,9 @@ export abstract class Ready {
     // Init App Commands Guilds
     await pClient.$connect()
       .then(() => pino.info('✓ Connected to Database...'))
-      .catch(() => pino.error('✕ Error when connecting to Database'));
+      .catch((err) => {
+        pino.error('✕ Error when connecting to Database', err);
+        sentry.captureException(err);
+      });
   }
 }

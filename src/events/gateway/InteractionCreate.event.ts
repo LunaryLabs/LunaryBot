@@ -1,6 +1,7 @@
 import { ArgsOf, Client, Discord, On } from 'discordx';
 
 import { pino } from '$structures/Logger.js';
+import { sentry } from '$structures/Sentry.js';
 
 @Discord()
 export abstract class InteractionCreate {
@@ -15,7 +16,8 @@ export abstract class InteractionCreate {
         case false: { i.reply('Falha ao executar essa interação...') };
       };
 
-      pino.error('✕', err);
+      pino.error('✕ Failed to run an interaction', err);
+      sentry.captureException(err);
     }
   }
 }

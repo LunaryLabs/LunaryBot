@@ -1,12 +1,9 @@
-// Load Events and Commands
-import '$helpers/CommandHelper.js';
-import '$helpers/EventHelper.js';
+import '$helpers/Environment.js';
+import '$helpers/Command.js';
+import '$helpers/Event.js';
+import '$structures/Sentry.js';
 
 import { Lunary } from '$structures/Client.js';
-// Load Env
-import { config } from 'dotenv';
-
-config()
 
 export const lunary = new Lunary();
 export default lunary
