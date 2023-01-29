@@ -32,7 +32,7 @@ export abstract class Ready {
     // Fetch Guilds
     client.guilds.fetch()
       .then(() => pino.info('✓ Synchronized guilds...'))
-      .catch((err) => {
+      .catch((err: unknown) => {
         pino.error('✕ Error when synchronizing guilds...', err);
         sentry.captureException(err);
       });
@@ -46,7 +46,7 @@ export abstract class Ready {
     // Init App Commands Guilds
     client.initApplicationCommands()
       .then(() => pino.info('✓ Synchronized global commands...'))
-      .catch((err) => {
+      .catch((err: unknown) => {
         pino.error('✕ Error when synchronizing global commands...', err);
         sentry.captureException(err);
       });
@@ -64,7 +64,7 @@ export abstract class Ready {
     // Init App Commands Guilds
     await pClient.$connect()
       .then(() => pino.info('✓ Connected to Database...'))
-      .catch((err) => {
+      .catch((err: unknown) => {
         pino.error('✕ Error when connecting to Database', err);
         sentry.captureException(err);
       });

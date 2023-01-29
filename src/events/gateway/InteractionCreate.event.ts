@@ -10,7 +10,7 @@ export abstract class InteractionCreate {
     try {
       // Execute interaction
       client.executeInteraction(i)
-    } catch (err) {
+    } catch (err: unknown) {
       if (i.isRepliable()) switch (i.deferred || i.replied) {
         case true: { i.editReply('Falha ao executar essa interação...') };
         case false: { i.reply('Falha ao executar essa interação...') };

@@ -109,7 +109,7 @@ export abstract class Kick {
       // Reply's to the user
       await interaction.editReply({ embeds: [successEmbed] });
       return;
-    } catch (err) {
+    } catch (err: unknown) {
       // Log's the error on console
       pino.error('✕ Error when kicking an user', err);
       sentry.captureException(err);
