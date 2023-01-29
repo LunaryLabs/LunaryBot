@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
+    "useUnknownInCatchVariables": true,
     "paths": {
       "$lib/*": ["src/lib/*"],
       "$plugins/*": ["src/lib/plugins/*"],
