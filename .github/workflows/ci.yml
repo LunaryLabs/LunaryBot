@@ -50,6 +50,10 @@ jobs:
       - name: ⬇️ pNPM Install
         run: pnpm install --frozen-lockfile
 
+      # Pnpm Generate
+      - name: ⬇️ pNPM Generate
+        run: pnpm run Generate
+
       # Lint Project
       - name: 📦 pNPM Build
         run: pnpm run build

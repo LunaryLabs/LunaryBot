@@ -10,7 +10,8 @@
     "dev": "tsx watch src/index.ts",
     "prod": "node dist/index.js",
     "build": "tsc && tsc-alias",
-    "migrate": "prisma migrate dev --schema=./src/database/schema.prisma"
+    "generate": "prisma generate --schema=./src/database/schema.prisma",
+    "migrate": "prisma migrate --schema=./src/database/schema.prisma"
   },
   "dependencies": {
     "@discordx/importer": "^1.1.10",
