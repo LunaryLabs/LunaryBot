@@ -2,8 +2,8 @@ import type { IResponse } from '$lib/commands/anime/IResponse.js';
 
 export const getAnime = async (animeName: string) => {
   // Faz a requisição à API externa
-  const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeName}`)
-  const anime: IResponse = await response.json()
+  const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeName}`);
+  const anime: IResponse = await response.json();
   const { attributes } = anime.data[0];
 
   const formattedAnime = {
@@ -15,7 +15,7 @@ export const getAnime = async (animeName: string) => {
     nsfw: attributes?.nsfw
   }
 
-  return formattedAnime
+  return formattedAnime;
 }
 
 export interface AnimeType {

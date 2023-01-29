@@ -1,4 +1,5 @@
 import { pino } from '$structures/Logger.js';
+import { sentry } from '$structures/Sentry.js';
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
@@ -127,7 +128,8 @@ export abstract class Ban {
       return;
     } catch (err) {
       // Log's the error on console
-      pino.error('✕', err);
+      pino.error('✕ Error when banning an user', err);
+      sentry.captureException(err);
 
       // And tell's the user
       const failEmbed = new EmbedBuilder()

@@ -7,16 +7,13 @@ const pretty = PinoPretty({
 
   // Single Line
   singleLine: true,
-  append: true,
+  append: true
 });
 
-export const pino = Pino(
-  {
-    // Info of the Logger
-    name: 'LunaryBot',
-    enabled: true,
-    timestamp: false,
-    safe: true,
-  },
-  pretty,
-);
+export const pino = Pino({
+  // Info of the Logger
+  name: 'LunaryBot',
+  enabled: true,
+  timestamp: false,
+  safe: true,
+}, pretty);
