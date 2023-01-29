@@ -52,7 +52,7 @@ jobs:
 
       # Pnpm Generate
       - name: ⬇️ pNPM Generate
-        run: pnpm run Generate
+        run: pnpm run generate
 
       # Lint Project
       - name: 📦 pNPM Build
