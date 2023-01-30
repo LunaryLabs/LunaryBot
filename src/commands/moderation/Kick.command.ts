@@ -1,5 +1,6 @@
 import { pino } from '$structures/Logger.js';
 import { sentry } from '$structures/Sentry.js';
+import { DeepNonNullable } from '$types/Common';
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashOption } from 'discordx';
 
@@ -29,7 +30,7 @@ export abstract class Kick {
     reason: string,
 
     interaction: ChatInputCommandInteraction,
-    client: Client
+    client: DeepNonNullable<Client>
   ) {
     // Defer the reply to prevent timeout error's
     await interaction.deferReply({ fetchReply: true });
@@ -38,7 +39,6 @@ export abstract class Kick {
     if (!interaction.member) throw new ReferenceError('Member don\'t exist!');
     if (!interaction.guild) throw new ReferenceError('I don\'t in a guild!');
     if (!interaction.guild.members.me) throw new ReferenceError('I don\'t a member in a guild!');
-    if (!client.user) throw new ReferenceError('Client don\'t exist!');
 
     // Get role from the User
     const roles = interaction.member.roles as GuildMemberRoleManager;
@@ -111,7 +111,7 @@ export abstract class Kick {
       return;
     } catch (err: unknown) {
       // Log's the error on console
-      pino.error('✕ Error when kicking an user', err);
+      pino.error('\u2717 Error when kicking an user: ', err);
       sentry.captureException(err);
 
       // And tell's the user

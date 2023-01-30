@@ -1,5 +1,6 @@
 import { pino } from '$structures/Logger.js';
 import { sentry } from '$structures/Sentry.js';
+import { DeepNonNullable } from '$types/Common';
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, PermissionsBitField } from 'discord.js';
 import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 
@@ -48,7 +49,7 @@ export abstract class Ban {
     days: number,
 
     interaction: ChatInputCommandInteraction,
-    client: Client
+    client: DeepNonNullable<Client>
   ) {
     // Defer the reply to prevent timeout error's
     await interaction.deferReply({ fetchReply: true });
@@ -128,7 +129,7 @@ export abstract class Ban {
       return;
     } catch (err: unknown) {
       // Log's the error on console
-      pino.error('✕ Error when banning an user', err);
+      pino.error('\u2717 Error when banning an user: ', err);
       sentry.captureException(err);
 
       // And tell's the user
