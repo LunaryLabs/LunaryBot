@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "type": "module",
   "main": "dist/index.js",
-  "packageManager": "pnpm@7.26.2",
+  "packageManager": "pnpm@7.26.3",
   "license": "MIT",
   "scripts": {
     "start": "tsx src/index.ts",
