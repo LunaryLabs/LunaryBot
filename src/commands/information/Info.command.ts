@@ -9,7 +9,8 @@ export abstract class Info {
     type: ApplicationCommandType.User,
   })
   async Handler(interaction: UserContextMenuCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true })
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ ephemeral: true, fetchReply: true })
 
     let infoEmbed = new EmbedBuilder()
       .setAuthor({ name: `${interaction.targetMember?.user.username}`, iconURL: `https://cdn.discordapp.com/avatars/${interaction.targetUser.id}/${interaction.targetUser?.avatar}.jpg?size=4096` })
@@ -25,5 +26,6 @@ export abstract class Info {
       })
 
     await interaction.editReply({ embeds: [infoEmbed] })
+    return;
   }
 };

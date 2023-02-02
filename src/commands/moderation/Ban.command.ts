@@ -8,7 +8,7 @@ import { Client, Discord, Slash, SlashChoice, SlashOption } from 'discordx';
 export abstract class Ban {
   @Slash({
     name: 'banir',
-    description: 'Moderação Bane usuários',
+    description: 'Moderação » Bane usuários',
     defaultMemberPermissions: ['BanMembers'],
     dmPermission: false
   })
@@ -67,9 +67,8 @@ export abstract class Ban {
     if (targetRoles.highest.position > roles.highest.position) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de banir pessoas acima de você!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -80,9 +79,8 @@ export abstract class Ban {
     if (user.id === client.user.id) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de banir o bot!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -93,9 +91,8 @@ export abstract class Ban {
     if (user.id === interaction.user.id) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de banir-se!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -105,9 +102,8 @@ export abstract class Ban {
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Eu não tenho a permissão de banir membros (BanMembers)!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -120,9 +116,8 @@ export abstract class Ban {
 
       // And tell's the user
       const successEmbed = new EmbedBuilder()
-        .setTitle('Sucesso!')
         .setDescription('Usuário banido com sucesso!')
-        .setColor('Green');
+        .setColor(0x2ADE24);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [successEmbed] });
@@ -134,9 +129,8 @@ export abstract class Ban {
 
       // And tell's the user
       const failEmbed = new EmbedBuilder()
-        .setTitle('Sem sucesso!')
         .setDescription('Não foi possível banir esse usuário!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [failEmbed] });

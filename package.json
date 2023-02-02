@@ -6,12 +6,15 @@
   "packageManager": "pnpm@7.26.3",
   "license": "MIT",
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
-    "prod": "node dist/index.js",
-    "build": "tsc && tsc-alias",
-    "generate": "prisma generate --schema=./src/database/schema.prisma",
-    "migrate": "prisma migrate --schema=./src/database/schema.prisma"
+    "prod:start": "NODE_ENV=semi-production tsx src/Loader.ts",
+    "dev:start": "NODE_ENV=development tsx watch src/Loader.ts",
+
+    "dist:start": "NODE_ENV=production node dist/Loader.js",
+    "dist:stand": "NODEw_ENV=production node dist/Loader.js",
+    "dist:build": "tsc && tsc-alias",
+
+    "prisma:generate": "prisma generate --schema=./src/database/schema.prisma",
+    "prisma:migrate": "prisma migrate deploy --schema=./src/database/schema.prisma"
   },
   "dependencies": {
     "@discordx/importer": "^1.1.10",
@@ -28,11 +31,9 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "@esbuild-plugins/tsconfig-paths": "^0.1.2",
     "@types/node": "^18.11.18",
     "dotenv": "^16.0.3",
     "prisma": "^4.9.0",
-    "rollup": "^3.12.0",
     "tsc-alias": "^1.8.2",
     "tsx": "^3.12.2",
     "typescript": "^4.9.4"

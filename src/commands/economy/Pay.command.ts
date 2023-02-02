@@ -39,7 +39,8 @@ export abstract class Pay {
 
     interaction: ChatInputCommandInteraction
   ) {
-    await interaction.deferReply();
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
     this.receiver = user as GuildMember;
     this.quantity = quantity;
@@ -47,14 +48,15 @@ export abstract class Pay {
     this.payer = interaction.member as GuildMember;
 
     const waitingEmbed = new EmbedBuilder()
-      .setColor('Yellow')
-      .setDescription(`Aguardando <@${interaction.user.id}> confirmar a transferência...`)
+      .setColor(0xFFA811)
+      .setDescription(`Aguardando <@${interaction.user.id}> confirmar a transferência..`)
 
     this.waitingInteraction = await interaction.editReply({
       embeds: [waitingEmbed]
     })
 
     await this.HandleConfirmation(interaction);
+    return;
   }
 
   async HandleConfirmation(interaction: ChatInputCommandInteraction) {
@@ -88,6 +90,7 @@ export abstract class Pay {
       components: [confirmRow],
       isInteraction: true
     });
+    return;
   }
 
   // Handle's when the user accept the transfer
@@ -123,6 +126,7 @@ export abstract class Pay {
     // ***************
     console.log(receiverDb)
     console.log(payerDb)
+    return;
   }
 
   // Handle's when the user declines the transfer
@@ -130,7 +134,7 @@ export abstract class Pay {
   async HandleCounteract(interaction: ButtonInteraction) {
     const cancelledEmbed = new EmbedBuilder()
       .setColor('Red')
-      .setDescription(`<@${interaction.user.id}> cancelou a transferência...`);
+      .setDescription(`<@${interaction.user.id}> cancelou a transferência..`);
 
     this.waitingInteraction.edit({
       components: [],
@@ -139,11 +143,12 @@ export abstract class Pay {
 
     const userCancelledEmbed = new EmbedBuilder()
       .setColor('Red')
-      .setDescription('Você cancelou a transferência...');
+      .setDescription('Você cancelou a transferência..');
 
     this.confirmInteraction.edit({
       components: [],
       embeds: [userCancelledEmbed]
     });
+    return;
   }
 }

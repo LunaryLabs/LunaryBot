@@ -1,7 +1,19 @@
 {
   "configurations": [
     {
-      "command": "pnpm dev",
+      "command": "pnpm run prod",
+      "name": "Debug - Production",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm run start",
+      "name": "Debug - Start",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm run dev",
       "name": "Debug - Dev",
       "request": "launch",
       "type": "node-terminal"

@@ -22,7 +22,8 @@ export abstract class Jokenpo {
 
     interaction: ChatInputCommandInteraction,
   ) {
-    await interaction.deferReply();
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
     const botChoices = ['rock', 'paper', 'scissors'];
     const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
@@ -47,9 +48,9 @@ export abstract class Jokenpo {
     if (userChoice == 'paper' && botChoice == 'rock') result = 1;
 
     switch (result) {
-      case 1: return await interaction.editReply('Você ganhou!');
-      case 2: return await interaction.editReply('o Robô ganhou!');
-      default: return await interaction.editReply('EMPATE');
+      case 1: await interaction.editReply('Você ganhou!'); return;
+      case 2: await interaction.editReply('o Robô ganhou!'); return;
+      default: await interaction.editReply('EMPATE'); return;
     }
   }
 }

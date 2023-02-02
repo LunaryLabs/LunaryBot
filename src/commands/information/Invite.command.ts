@@ -9,7 +9,8 @@ export abstract class Invite {
     dmPermission: true
   })
   async Handler(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply(); //e
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
     const infoEmbed = new EmbedBuilder()
       .setTitle('LunaryLabs')
@@ -41,5 +42,6 @@ export abstract class Invite {
       embeds: [infoEmbed],
       components: [buttonRow]
     })
+    return;
   }
 }

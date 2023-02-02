@@ -8,7 +8,7 @@ import { Client, Discord, Slash, SlashOption } from 'discordx';
 export abstract class Kick {
   @Slash({
     name: 'expulsar',
-    description: 'Moderação Expulse usuários',
+    description: 'Moderação » Expulse usuários',
     defaultMemberPermissions: ['KickMembers'],
     dmPermission: false
   })
@@ -48,9 +48,8 @@ export abstract class Kick {
     if (targetRoles.highest.position > roles.highest.position) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de expulsar pessoas acima de você!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -61,9 +60,8 @@ export abstract class Kick {
     if (user.id === client.user.id) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de expulsar o bot!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -74,9 +72,8 @@ export abstract class Kick {
     if (user.id === interaction.user.id) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Você não é permitido de expulsar-se!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -87,9 +84,8 @@ export abstract class Kick {
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) {
       // Unauthorized Embed
       const unauthorizedEmbed = new EmbedBuilder()
-        .setTitle('Não permitido!')
         .setDescription('Eu não tenho a permissão de expulsar membros (KickMembers)!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [unauthorizedEmbed] });
@@ -102,9 +98,8 @@ export abstract class Kick {
 
       // And tell's the user
       const successEmbed = new EmbedBuilder()
-        .setTitle('Sucesso!')
         .setDescription('Usuário expulso com sucesso!')
-        .setColor('Green');
+        .setColor(0x2ADE24);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [successEmbed] });
@@ -116,9 +111,8 @@ export abstract class Kick {
 
       // And tell's the user
       const failEmbed = new EmbedBuilder()
-        .setTitle('Sem sucesso!')
         .setDescription('Não foi possível expulsar esse usuário!')
-        .setColor('Red');
+        .setColor(0xDE3124);
 
       // Reply's to the user
       await interaction.editReply({ embeds: [failEmbed] });

@@ -9,7 +9,8 @@ export abstract class Avatar {
     type: ApplicationCommandType.User
   })
   async Handler(interaction: UserContextMenuCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true })
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ ephemeral: true, fetchReply: true })
 
     // User Avatar Embed
     let avatarEmbed = new EmbedBuilder()
@@ -18,5 +19,6 @@ export abstract class Avatar {
       .setImage(`https://cdn.discordapp.com/avatars/${interaction.targetUser.id}/${interaction.targetUser?.avatar}.jpg?size=4096`)
 
     await interaction.editReply({ embeds: [avatarEmbed] })
+    return;
   }
 };

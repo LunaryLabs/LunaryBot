@@ -1,4 +1,4 @@
-import { IResponse } from '$lib/commands/anime/IResponse.js';
+import { IResponse } from '$lib/commands/KitsuResponse.js';
 import { AnimeType, getAnime } from '$plugins/Anime.js';
 import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 import { ButtonComponent, Discord, Slash, SlashOption } from 'discordx';
@@ -45,7 +45,8 @@ export abstract class Anime {
     interaction: ChatInputCommandInteraction,
   ) {
     // Defer the reply to prevent timeout error's
-    await interaction.deferReply();
+    // Defer the reply to prevent timeout error's
+    await interaction.deferReply({ fetchReply: true });
 
     // Set Response and ID
     this.res = await getAnime(anime);
@@ -78,10 +79,11 @@ export abstract class Anime {
     const warnEmbed = new EmbedBuilder()
       .setTitle('Aviso!')
       .setDescription('Animes pesquisados aqui podem conter conteúdo NSFW, não nós responsabilizamos por qualquer conteúdo exibido aqui.')
-      .setColor('Yellow');
+      .setColor(0xFFA811);
 
     // Reply's to the user
     await interaction.editReply({ embeds: [warnEmbed], components: [buttonRow] });
+    return;
   }
 
   @ButtonComponent({ id: 'animeView' })
@@ -108,6 +110,7 @@ export abstract class Anime {
 
     // Reply to the user
     await interaction.update({ embeds: [embed], components: [] });
+    return;
   }
 
 }

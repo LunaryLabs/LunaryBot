@@ -7,7 +7,7 @@ import { sentry } from '$structures/Sentry.js';
 export abstract class RateLimit {
   @On.rest({ event: 'rateLimited' })
   async Handler([data]: RestArgsOf<'rateLimited'>) {
-    pino.error('✕ Rate Limited', data);
+    pino.error('\u2717 Rate Limited: ', data);
     sentry.captureException(data);
   }
 }

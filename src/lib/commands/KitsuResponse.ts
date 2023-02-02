@@ -34,7 +34,7 @@ export interface IKitsuAnimeResponse {
      * @name synopsis
      * @typedef string
      *
-     * @example In the year 2071, humanity has colonoized several of the planets and moons...
+     * @example In the year 2071, humanity has colonoized several of the planets and moons..
      */
     synopsis: string;
 

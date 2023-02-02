@@ -4,16 +4,11 @@ import PinoPretty from 'pino-pretty';
 const pretty = PinoPretty({
   // Pretty Options
   colorize: true,
-
-  // Single Line
-  singleLine: true,
+  translateTime: true,
   append: true
 });
 
 export const pino = Pino({
-  // Info of the Logger
-  name: 'LunaryBot',
-  enabled: true,
-  timestamp: false,
   safe: true,
+  enabled: true
 }, pretty);
