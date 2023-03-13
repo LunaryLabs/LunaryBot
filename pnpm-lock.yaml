@@ -12,7 +12,7 @@ specifiers:
   dotenv: ^16.0.3
   erlpack: github:discord/erlpack
   pino: ^8.8.0
-  pino-pretty: ^9.1.1
+  pino-pretty: ^10.0.0
   prisma: ^4.9.0
   tsc-alias: ^1.8.2
   tsx: ^3.12.2
@@ -30,7 +30,7 @@ dependencies:
   discordx: 11.6.0_discord.js@14.7.1
   erlpack: github.com/discord/erlpack/cbe76be04c2210fc9cb6ff95910f0937c1011d04
   pino: 8.8.0
-  pino-pretty: 9.1.1
+  pino-pretty: 10.0.0
   utf-8-validate: 6.0.2
   zlib-sync: 0.1.7
 
@@ -932,8 +932,8 @@ packages:
       split2: 4.1.0
     dev: false
 
-  /pino-pretty/9.1.1:
-    resolution: {integrity: sha512-iJrnjgR4FWQIXZkUF48oNgoRI9BpyMhaEmihonHeCnZ6F50ZHAS4YGfGBT/ZVNsPmd+hzkIPGzjKdY08+/yAXw==}
+  /pino-pretty/10.0.0:
+    resolution: {integrity: sha512-zKFjYXBzLaLTEAN1ayKpHXtL5UeRQC7R3lvhKe7fWs7hIVEjKGG/qIXwQt9HmeUp71ogUd/YcW+LmMwRp4KT6Q==}
     hasBin: true
     dependencies:
       colorette: 2.0.19
