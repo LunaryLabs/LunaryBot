@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "type": "module",
   "main": "dist/index.js",
-  "packageManager": "pnpm@7.26.3",
+  "packageManager": "pnpm@8.9.2",
   "license": "MIT",
   "scripts": {
     "prod:start": "NODE_ENV=semi-production tsx src/Loader.ts",
