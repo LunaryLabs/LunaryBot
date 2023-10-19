@@ -25,7 +25,7 @@ jobs:
     steps:
       # Checkout
       - name: 📀 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Configure GIT
       - name: ⚙️ Configure Git User

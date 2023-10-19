@@ -28,7 +28,7 @@ jobs:
     steps:
       # Checkout
       - name: 📀 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Configure CodeQL
       - name: ⚙️ Initialize CodeQL
