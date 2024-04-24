@@ -25,7 +25,7 @@
     "discord.js": "^14.7.1",
     "discordx": "^11.6.0",
     "erlpack": "github:discord/erlpack",
-    "pino": "^8.8.0",
+    "pino": "^9.0.0",
     "pino-pretty": "^9.1.1",
     "utf-8-validate": "^6.0.2",
     "zlib-sync": "^0.1.7"
