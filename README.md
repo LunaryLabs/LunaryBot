@@ -92,9 +92,10 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto :
     </td>
     <td align="center">
       <a href="#">
-        <img src="https://cdn.discordapp.com/avatars/465859183250767882/8e6ca9d7af1c01cabfbb5ba6dc454fce.png?size=4096" width="200px" alt="photo"/><br>
+        <img src="![giphy](https://github.com/user-attachments/assets/d46008dd-3102-4d8b-a21c-51ef036a15c3)
+tars/465859183250767882/8e6ca9d7af1c01cabfbb5ba6dc454fce.png?size=4096" width="200px" alt="photo"/><br>
         <sub>
-          <b>bueno.#4181</b>
+          <b>7gurte</b>
         </sub>
       </a>
     </td>
