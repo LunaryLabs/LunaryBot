@@ -34,7 +34,7 @@ jobs:
           git config --local user.name "GitHub Actions"
 
       - name: ⬇️ Install pNPM
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         id: pnpm-install
         with:
           version: ${{ matrix.pnpm }}
