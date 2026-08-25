@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@discordx/importer": "^1.1.10",
-    "@prisma/client": "^4.9.0",
+    "@prisma/client": "^7.0.0",
     "@sentry/node": "^7.34.0",
     "@sentry/tracing": "^7.34.0",
     "bufferutil": "^4.0.7",
